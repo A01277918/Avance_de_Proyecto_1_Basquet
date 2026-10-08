@@ -1,3 +1,8 @@
+#Programa para calcular el desempeño de un jugador de baloncesto
+
+print("Bienvenido al programa para calcular el desempeño de tu equipo de basquetbol de hasta 5 personas")
+
+#Constantes para calcular el desempeño del jugador
 Valor_Punto = 1
 Valor_Asistencias = 0.8
 Valor_Rebotes = 0.5
@@ -8,7 +13,7 @@ Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
 
-#FUNCION PARA PEDIR Y VALIDAR DATOS
+#Funcion para pedir y validar datos de los jugadores
 
 def pedir_dato(mensaje):
     """Pide un dato al usuario y valida que no sea un numero entero negativo"""
@@ -22,7 +27,7 @@ def pedir_dato(mensaje):
         except ValueError:
             print("El valor debe ser un numero entero positivo. Intente de nuevo.")
 
-# FUNCION PARA OBTENER ESTADISTICAS
+#Funcion para obtener estadisticas de cada jugador
 
 def obtener_estadisticas():
     """Solicita estadisticas a evaluar de cada jugador"""
@@ -40,7 +45,7 @@ def obtener_estadisticas():
             robos, pase_fallido, puntos_tres, 
             perdidas, tapones, faltas)
 
-# FUNCION PARA CALCULAR DESEMPENO
+#Funcion para calcular el desempeño de cada jugador
 
 def calcular_desempeno(puntos, asistencias, rebotes, 
                     robos, pase_fallido, puntos_tres, 
@@ -48,14 +53,19 @@ def calcular_desempeno(puntos, asistencias, rebotes,
 
     """Calculo de la puntuacion de desempeño del jugador"""
 
-    puntuacion = (puntos * Valor_Punto + asistencias * Valor_Asistencias + 
-                    rebotes * Valor_Rebotes + robos * Valor_Robos + 
-                    puntos_tres * Valor_Triple - pase_fallido * Valor_Pase_Fallido
-                    - perdidas * Valor_Perdidas - tapones * Valor_Tapones - faltas * Valor_Faltas)
+    puntuacion = (puntos * Valor_Punto 
+                    + asistencias * Valor_Asistencias 
+                    + rebotes * Valor_Rebotes 
+                    + robos * Valor_Robos 
+                    + puntos_tres * Valor_Triple 
+                    + pase_fallido * Valor_Pase_Fallido
+                    + perdidas * Valor_Perdidas 
+                    + tapones * Valor_Tapones 
+                    + faltas * Valor_Faltas)
 
     return puntuacion
 
-# FUNCION PARA OBTENER CALIFICACION
+#Funcion para obtener calificacion de cada jugador
 
 def obtener_calificacion(puntuacion):
     """Convierte la calificacion en una puntuacion del 1 al 10"""
@@ -73,7 +83,7 @@ def obtener_calificacion(puntuacion):
         
     return calificacion
 
-# FUNCION PARA MOSTRAR RESULTADO
+#Funcion para mostrar el restultado de cada jugador
 
 def mostrar_resultado(nombre, puntuacion, calificacion):
     """Muestra el resultado y calificacion del jugador"""
@@ -83,16 +93,34 @@ def mostrar_resultado(nombre, puntuacion, calificacion):
     print("Puntuacion:", puntuacion)
     print("Calificacion:", calificacion, "/ 10")
 
-# LO QUE SE ESPERA DEL PROGRAMA
+#Lo que se espera del programa
 
+#Aun no esta completo debido a que aun no tengo los conocimientos sorry (luego borrare esta parte no se preocupen)
+
+while True:
+    print("Estadisticas del equipo")
+
+    # Preguntar cuantos jugadores se evaluaran
     while True:
-        print("Estadisticas del jugador")
+        try:
+            cantidad_jugadores = int(
+                input("¿Cuantos jugadores deseas evaluar? (1-5): ")
+            )
 
-        jugadores = ()
+            if 1 <= cantidad_jugadores <= 5:
+                break
 
-        contador = 1
+            print("Error: debes ingresar un numero del 1 al 5.")
 
-        while contador <= 5:
+        except ValueError:
+            print("Error: debes ingresar un numero entero.")
+
+    jugadores = []
+
+    contador = 1
+
+    while contador <= cantidad_jugadores:
+            
             print("Jugador", contador)
 
             nombre = str(input("Nombre del jugador: "))
@@ -108,3 +136,44 @@ def mostrar_resultado(nombre, puntuacion, calificacion):
             jugadores.append(jugador)
 
             contador += 1
+
+#Mostrar resultados de cada jugador
+
+            print("Resultados de los jugadores")
+
+    for jugador in jugadores:
+            mostrar_resultado(jugador[0], jugador[1], jugador[2])
+
+#Encontrar el jugador con mejor jugador
+
+    mejor_jugador = jugadores[0]
+    contador = 1
+    while contador < len(jugadores):
+            if jugadores[contador][1] > mejor_jugador[1]:
+                mejor_jugador = jugadores[contador]
+            contador += 1
+
+    print("Mejor desempeño")
+
+    print("jugador:", mejor_jugador[0])
+    print("Puntuación:", mejor_jugador[1])
+    print("Calificación:", mejor_jugador[2], "/ 10")
+
+#Pregunta si quiere continuar
+
+    while True:
+
+            continuar = input(
+        "\n¿Deseas realizar otra busqueda? (si/no): "
+    ).lower()
+
+            if continuar == "si":
+                break
+
+            elif continuar == "no":
+                print("Programa finalizado.")
+                break
+            else:
+                print("Opcion invalida. Ingresa 'si' o 'no'.")
+    if continuar == "no":
+            break
