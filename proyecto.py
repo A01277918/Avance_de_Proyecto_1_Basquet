@@ -1,6 +1,13 @@
-#Programa para calcular el desempeño de un jugador de baloncesto
+#Encabezado
+"""
+Este proyecto esta echo por Jose Alberto Juarez Palazuelos
+Este Programa es para calcular el desempeño de un jugador de baloncesto
+O hasta el desepeño de todo un equipo de 5 personas
+"""
 
 print("Bienvenido al programa para calcular el desempeño de tu equipo de basquetbol de hasta 5 personas")
+
+#1. Variables globales y Constantes
 
 #Constantes para calcular el desempeño del jugador
 Valor_Punto = 1
@@ -12,6 +19,8 @@ Valor_Triple = 3
 Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
+
+#2. Funciones
 
 #Funcion para pedir y validar datos de los jugadores
 
@@ -41,9 +50,9 @@ def obtener_estadisticas():
     tapones = pedir_dato("Tiros bloqueados: ")
     faltas = pedir_dato("Faltas cometidas: ")
 
-    return (puntos, asistencias, rebotes, 
+    return [puntos, asistencias, rebotes, 
             robos, pase_fallido, puntos_tres, 
-            perdidas, tapones, faltas)
+            perdidas, tapones, faltas]
 
 #Funcion para calcular el desempeño de cada jugador
 
@@ -93,9 +102,8 @@ def mostrar_resultado(nombre, puntuacion, calificacion):
     print("Puntuacion:", puntuacion)
     print("Calificacion:", calificacion, "/ 10")
 
-#Lo que se espera del programa
 
-#Aun no esta completo debido a que aun no tengo los conocimientos sorry (luego borrare esta parte no se preocupen)
+#3. Funcion principal del programa
 
 while True:
     print("Estadisticas del equipo")
@@ -107,59 +115,79 @@ while True:
                 input("¿Cuantos jugadores deseas evaluar? (1-5): ")
             )
 
+# Verificar que la cantidad este entre 1 y 5
             if 1 <= cantidad_jugadores <= 5:
                 break
 
             print("Error: debes ingresar un numero del 1 al 5.")
 
+# Evitar que el programa se detenga si se ingresan letras
         except ValueError:
             print("Error: debes ingresar un numero entero.")
 
-    jugadores = []
-
+# Crear una lista vacia para almacenar los datos de los jugadores
+    nombres = []
+    estadisticas_jugadores = []
+    puntuaciones = []
+    calificaciones = []
     contador = 1
 
-    while contador <= cantidad_jugadores:
-            
-            print("Jugador", contador)
+#-----------------------------------------------------------------
 
-            nombre = str(input("Nombre del jugador: "))
+# Registrar las estadisticas de cada jugador
+    for i in range(cantidad_jugadores):
 
-            estadisticas = obtener_estadisticas()
+        print("\nJugador", i + 1)
 
-            puntuacion = calcular_desempeno(*estadisticas)
+        nombre = str(input("Nombre del jugador: "))
 
-            calificacion = obtener_calificacion(puntuacion)
+# Guardar las estadisticas como una lista
+        estadisticas = obtener_estadisticas()
 
-            jugador = (nombre, puntuacion, calificacion)
+# Agregar los datos a sus respectivas listas
+        nombres.append(nombre)
+        estadisticas_jugadores.append(estadisticas)
 
-            jugadores.append(jugador)
+        puntuacion = calcular_desempeno(*estadisticas)
 
-            contador += 1
+# Guardar la puntuacion en una lista
+        puntuaciones.append(puntuacion)
+
+# guardar la calificacion en una lista
+        calificacion = obtener_calificacion(puntuacion)
+        calificaciones.append(calificacion)
+
 
 #Mostrar resultados de cada jugador
 
-            print("Resultados de los jugadores")
+    print("\nResultados de los jugadores")
 
-    for jugador in jugadores:
-            mostrar_resultado(jugador[0], jugador[1], jugador[2])
+    for i in range(cantidad_jugadores):
 
-#Encontrar el jugador con mejor jugador
+        mostrar_resultado(
+            nombres[i],
+            puntuaciones[i],
+            calificaciones[i]
+        )
 
-    mejor_jugador = jugadores[0]
-    contador = 1
-    while contador < len(jugadores):
-            if jugadores[contador][1] > mejor_jugador[1]:
-                mejor_jugador = jugadores[contador]
-            contador += 1
+# Encontrar al mejor jugador usando su indice
+    mejor_indice = 0
 
-    print("Mejor desempeño")
+    for i in range(1, len(puntuaciones)):
 
-    print("jugador:", mejor_jugador[0])
-    print("Puntuación:", mejor_jugador[1])
-    print("Calificación:", mejor_jugador[2], "/ 10")
+        if puntuaciones[i] > puntuaciones[mejor_indice]:
+            mejor_indice = i
 
-#Pregunta si quiere continuar
+    print("\nMejor desempeno")
+
+# Usar el mismo indice en las listas
+    print("Jugador:", nombres[mejor_indice])
+    print("Puntuacion:", puntuaciones[mejor_indice])
+    print("Calificacion:", calificaciones[mejor_indice], "/ 10")
+
+#----------------------------------------------------------------
+
+# Preguntar si el usuario desea evaluar otro grupo de jugadores
 
     while True:
 
@@ -173,7 +201,11 @@ while True:
             elif continuar == "no":
                 print("Programa finalizado.")
                 break
+
             else:
+# Volver a preguntar si la opcion ingresada no es valida
                 print("Opcion invalida. Ingresa 'si' o 'no'.")
+
+# Finalizar el ciclo principal si el usuario decide salir
     if continuar == "no":
             break
