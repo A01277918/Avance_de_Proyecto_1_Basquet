@@ -33,7 +33,10 @@ Ciclos while.
 Validación de datos.
 Operaciones matemáticas.
 Programación modular.
-
+Listas para almacenar la información de varios jugadores.
+Ciclos for para recorrer las estadísticas de los jugadores.
+Comparación de resultados.
+Cálculo de promedios y sumas.
 
 ## Estadísticas Utilizadas
 
@@ -80,7 +83,6 @@ Tiros bloqueados.
 Faltas cometidas.
 
 
-
 calcular desempeño()
 
 Utiliza las estadísticas y los valores asignados a cada una para obtener la puntuación de desempeño del jugador
@@ -91,7 +93,7 @@ obtener_calificacion()
 
 Convierte la puntuación de desempeño del 1 al 10 mediante condiciones.
 
-La escala utilizada actualizada es: 
+La escala utilizada es: 
 
 Puntuación	   Calificación
 30 o más	      10
@@ -105,13 +107,21 @@ mostrar_resultado()
 
 Muestra el nombre del jugador, su puntuación y calificación del desempeño del jugador
 
+calcular_promedio_equipo()
+
+Calcula el promedio de las puntuaciones de desempeño de los jugadores registrados, para llegar a eso se suma las puntuaciones de los jugadores y divide el resultado entre la cantidad de jugadores evaluados.
+
+calcular_puntos_totales()
+
+Calcula el total de puntos anotados por los jugadores registrados, para llegar a eso recorre las estadísticas almacenadas de cada jugador y suma los puntos anotados.
+
 ## Estructura del Repositorio
 
 El repositorio tiene los siguientes archivos:
 
 Archivo	           Descripción
 
-primercodigo.py	  Contiene el código principal del proyecto, las constantes, las funciones y la lógica que se está 
+proyecto.py	        Contiene el código principal del proyecto, las constantes, las funciones y la lógica que se está 
                     desarrollando para calcular el desempeño de los jugadores.
 
 README.md	        Contiene la descripción del proyecto, su funcionamiento, estructura, estadísticas utilizadas e
@@ -147,11 +157,11 @@ cd NOMBRE_DEL_REPOSITORIO
 
 Ejecutar el archivo principal:
 
-python primercodigo.py
+python proyecto.py
 
 En algunos sistemas puede ser necesario utilizar:
 
-python3 primercodigo.py
+python3 proyecto.py
 
 
 ## Estado actual del proyecto
@@ -166,19 +176,23 @@ Una función para obtener las estadísticas de un jugador.
 Una función para calcular el desempeño.
 Una función para convertir el desempeño en una calificación.
 Una función para mostrar los resultados.
-La estructura inicial de un ciclo while para trabajar con varios jugadores.
+La posibilidad de seleccionar la cantidad de jugadores que se van a evaluar, siendo el mínimo 1 y el máximo 5.
+El almacenamiento de los nombres de los jugadores.
+El almacenamiento de las estadísticas, puntuaciones y calificaciones mediante listas.
+Un ciclo para solicitar y procesar la información de cada jugador.
+La comparación de las puntuaciones para identificar al jugador con mejor desempeño.
+El cálculo del promedio de desempeño del equipo.
+El cálculo de los puntos totales anotados por los jugadores.
+La opción de realizar una nueva evaluación o finalizar el programa.
 
 
 ## Próximos pasos
 
-La siguiente etapa del proyecto consiste en completar la lógica para:
+La siguiente etapa del proyecto consiste en continuar mejorando el programa para:
 
-Registrar correctamente a los 5 jugadores.
-Almacenar la información de cada jugador.
-Mostrar los resultados de los 5 jugadores.
-Comparar sus puntuaciones.
-Identificar al jugador con mayor desempeño.
-Permitir realizar una nueva búsqueda o finalizar el programa.
+Mejorar la presentación de los resultados.
+Agregar nuevas funcionalidades que permitan analizar el desempeño de los jugadores.
+Continuar desarrollando el proyecto conforme a los conocimientos adquiridos en programación.
 
 
 ## Licencia
@@ -204,45 +218,54 @@ Pérdida de balón = -1.5
 Tapón = 2
 Falta = -3
 
-4. Solicitar los datos de cada jugador.
+4. Solicitar los datos de los jugadores que desea evaluar, con un mínimo de 1 y un máximo de 5.
 
-5. Validar cada dato ingresado:
+5. Validar que la cantidad de jugadores ingresada se encuentre dentro del rango permitido. Si el dato es incorrecto, solicitarlo nuevamente.
+
+6. Crear las listas para almacenar los nombres, las estadísticas, las puntuaciones y las calificaciones de los jugadores
+
+7. Solicitar el nombre de cada jugador.
+
+8. Solicitar las estadísticas de cada jugador mediante la función obtener_estadisticas().
+
+9. Validar cada dato ingresado
 
 Verificar que sea un número entero.
 Verificar que no sea negativo.
 Si el dato es incorrecto, mostrar un mensaje de error y solicitarlo nuevamente.
 
-6. Obtener las estadísticas de cada jugador, del partido:
+10. Calcular la puntuación de desempeño de cada jugador utilizando el valor correspondiente de cada estadística.
 
-   * Puntos.
-   * Asistencias.
-   * Rebotes.
-   * Robos.
-   * Pases fallidos.
-   * Puntos de tres.
-   * Pérdidas de balón.
-   * Tapones
-   * Faltas
+Valor_Punto = 1
+Valor_Asistencias = 0.8
+Valor_Rebotes = 0.5
+Valor_Robos = 1.5
+Valor_Pase_Fallido = -2
+Valor_Triple = 3
+Valor_Perdidas = -1.5
+Valor_Tapones = 2
+Valor_Faltas = -3
 
+11. Convertir la puntuación de desempeño en una calificación del 1 al 10 mediante condiciones.
 
-7. Calcular la puntuación de desempeño de cada jugador utilizando el valor correspondiente de cada estadística.
+12. Guardar la información correspondiente de cada jugador en las listas correspondientes.
 
-8. Convertir la puntuación de desempeño en una calificación del 1 al 10 mediante condiciones.
+13. Mostrar el nombre, la puntuación y la calificación de cada jugador.
 
-9. Mostrar el nombre, puntuación y calificación de cada jugador.
+14. Comparar las puntuaciones con los jugadores registrados.
 
-10. Repetir el proceso mediante un ciclo while hasta registrar los 5 jugadores.
+15. Identificar al jugador con el mejor desempeño.
 
-11. Guardar la información de los jugadores para poder utilizarla posteriormente.
+16. Mostrar al jugador con mayor puntuación y su calificación.
 
-12. Comparar las puntuaciones de los 5 jugadores.
+17. Calcular el promedio de las puntuaciones de desempeño de los jugadores registrados.
 
-13. Identificar al jugador con la puntuación de desempeño más alta.
+18. Calcular los puntos totales anotados por todos los jugadores registrados.
 
-14. Mostrar el jugador con mayor puntuación y su calificación.
+19. Mostrar el promedio de desempeño del equipo y los puntos totales anotados.
 
-15. Preguntar al usuario si desea realizar otra búsqueda.
+20. Preguntar al usuario si quiere realizar otra evaluación.
 
-16. Si el usuario desea realizar otra búsqueda, regresar al proceso de registro.
+21. Si el usuario desea realizar otra evaluación, regresar al proceso de registro de jugadores.
 
-17. Si el usuario no desea realizar otra búsqueda, finalizar el programa.
+22. Si el usuario no desea realizar otra evaluación, finalizar el programa.

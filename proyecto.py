@@ -1,15 +1,15 @@
-#Encabezado
+#Encabezado --------------------------------------------------------------------
 """
 Este proyecto esta echo por Jose Alberto Juarez Palazuelos
 Este Programa es para calcular el desempeño de un jugador de baloncesto
 O hasta el desepeño de todo un equipo de 5 personas
 """
 
-#1. Importaciones
+#1. Importaciones ---------------------------------------------------------------
 
 print("Bienvenido al programa para calcular el desempeño de tu equipo de basquetbol de hasta 5 personas")
 
-#2. Variables globales y Constantes
+#2. Variables globales y Constantes ---------------------------------------------
 
 #Constantes para calcular el desempeño del jugador
 Valor_Punto = 1
@@ -22,9 +22,9 @@ Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
 
-#3. Funciones
+#3. Funciones ---------------------------------------------------------------------
 
-#Funcion para pedir y validar datos de los jugadores
+#Función para pedir y validar datos de los jugadores
 
 def pedir_dato(mensaje):
     """Pide un dato al usuario y valida que no sea un numero entero negativo"""
@@ -38,7 +38,7 @@ def pedir_dato(mensaje):
         except ValueError:
             print("El valor debe ser un numero entero positivo. Intente de nuevo.")
 
-#Funcion para obtener estadisticas de cada jugador
+#Función para obtener estadísticas de cada jugador
 
 def obtener_estadisticas():
     """Solicita estadisticas a evaluar de cada jugador"""
@@ -56,7 +56,7 @@ def obtener_estadisticas():
             robos, pase_fallido, puntos_tres, 
             perdidas, tapones, faltas]
 
-#Funcion para calcular el desempeño de cada jugador
+#Función para calcular el desempeño de cada jugador
 
 def calcular_desempeno(puntos, asistencias, rebotes, 
                     robos, pase_fallido, puntos_tres, 
@@ -76,7 +76,7 @@ def calcular_desempeno(puntos, asistencias, rebotes,
 
     return puntuacion
 
-#Funcion para obtener calificacion de cada jugador
+#Función para obtener calificación de cada jugador
 
 def obtener_calificacion(puntuacion):
     """Convierte la calificacion en una puntuacion del 1 al 10"""
@@ -94,7 +94,7 @@ def obtener_calificacion(puntuacion):
         
     return calificacion
 
-#Funcion para mostrar el restultado de cada jugador
+#Función para mostrar el resultado de cada jugador
 
 def mostrar_resultado(nombre, puntuacion, calificacion):
     """Muestra el resultado y calificacion del jugador"""
@@ -124,7 +124,7 @@ def calcular_puntos_totales(estadisticas_jugadores):
     return total
 
 
-#4. Función principal del programa
+#4. Función principal del programa ----------------------------------------
 
 while True:
     print("Estadisticas del equipo")
@@ -153,7 +153,7 @@ while True:
     calificaciones = []
     contador = 1
 
-# Registrar las estadisticas de cada jugador
+# Registrar las estadísticas de cada jugador
     for i in range(cantidad_jugadores):
 
         print("\nJugador", i + 1)
@@ -216,7 +216,6 @@ while True:
     print("Cantidad de jugadores", cantidad_jugadores)
     print("Puntos totales anotados", puntos_totales)
     print("Promedio del desempeño total de equipo", round(promedio_equipo, 2))
-
 
 
 # Preguntar si el usuario desea evaluar otro grupo de jugadores
