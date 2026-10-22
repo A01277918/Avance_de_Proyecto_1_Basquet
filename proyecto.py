@@ -5,9 +5,11 @@ Este Programa es para calcular el desempeño de un jugador de baloncesto
 O hasta el desepeño de todo un equipo de 5 personas
 """
 
+#1. Importaciones
+
 print("Bienvenido al programa para calcular el desempeño de tu equipo de basquetbol de hasta 5 personas")
 
-#1. Variables globales y Constantes
+#2. Variables globales y Constantes
 
 #Constantes para calcular el desempeño del jugador
 Valor_Punto = 1
@@ -20,7 +22,7 @@ Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
 
-#2. Funciones
+#3. Funciones
 
 #Funcion para pedir y validar datos de los jugadores
 
@@ -103,7 +105,26 @@ def mostrar_resultado(nombre, puntuacion, calificacion):
     print("Calificacion:", calificacion, "/ 10")
 
 
-#3. Funcion principal del programa
+#Funciones para calcular el promedio del equipo
+def calcular_promedio_equipo (puntuaciones):
+    """Calcular el promedio del desempeño de todos los jugadores"""
+    suma_puntuaciones = 0
+    for puntuacion in puntuaciones:
+        suma_puntuaciones += puntuacion
+    promedio = suma_puntuaciones /len (puntuaciones)
+    return promedio
+
+#Funciones para calcular los puntos totales del equipo
+#usando la lista anidada de estadísticas
+def calcular_puntos_totales(estadisticas_jugadores):
+    """Calcular los puntos anotados por los jugadores"""
+    total = 0
+    for jugador in estadisticas_jugadores:
+        total += jugador [0]
+    return total
+
+
+#4. Función principal del programa
 
 while True:
     print("Estadisticas del equipo")
@@ -131,8 +152,6 @@ while True:
     puntuaciones = []
     calificaciones = []
     contador = 1
-
-#-----------------------------------------------------------------
 
 # Registrar las estadisticas de cada jugador
     for i in range(cantidad_jugadores):
@@ -185,7 +204,20 @@ while True:
     print("Puntuacion:", puntuaciones[mejor_indice])
     print("Calificacion:", calificaciones[mejor_indice], "/ 10")
 
-#----------------------------------------------------------------
+
+#Calcular el promedio del equipo
+    promedio_equipo = calcular_promedio_equipo(puntuaciones)
+
+#Calcular los puntos totales con la matriz
+    puntos_totales = calcular_puntos_totales(estadisticas_jugadores)
+
+#Mostrar los resultados generales del equipo
+    print("\nResultados generales del equipo")
+    print("Cantidad de jugadores", cantidad_jugadores)
+    print("Puntos totales anotados", puntos_totales)
+    print("Promedio del desempeño total de equipo", round(promedio_equipo, 2))
+
+
 
 # Preguntar si el usuario desea evaluar otro grupo de jugadores
 
@@ -199,7 +231,7 @@ while True:
                 break
 
             elif continuar == "no":
-                print("Programa finalizado.")
+                print("Calculo finalizado ")
                 break
 
             else:
