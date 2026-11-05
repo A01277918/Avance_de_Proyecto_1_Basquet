@@ -1,8 +1,8 @@
 #Encabezado --------------------------------------------------------------------
 """
-Este proyecto esta echo por Jose Alberto Juarez Palazuelos
+Este proyecto esta echo por José Alberto Juárez Palazuelos
 Este Programa es para calcular el desempeño de un jugador de baloncesto
-O hasta el desepeño de todo un equipo de 5 personas
+O hasta el desempeño de todo un equipo de 5 personas
 """
 
 #1. Importaciones ---------------------------------------------------------------
@@ -21,6 +21,12 @@ Valor_Triple = 3
 Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
+
+nombres_estadisticas = [
+    "Puntos", "Asistencias", "Rebotes", "Robos",
+    "Pases fallidos", "Puntos de 3", "Perdidas",
+    "Tapones", "Faltas"
+]
 
 #3. Funciones ---------------------------------------------------------------------
 
@@ -110,7 +116,7 @@ def calcular_promedio_equipo (puntuaciones):
     """Calcular el promedio del desempeño de todos los jugadores"""
     suma_puntuaciones = 0
     for puntuacion in puntuaciones:
-        suma_puntuaciones += puntuacion
+        suma_puntuaciones = suma_puntuaciones + puntuacion
     promedio = suma_puntuaciones /len (puntuaciones)
     return promedio
 
@@ -120,11 +126,30 @@ def calcular_puntos_totales(estadisticas_jugadores):
     """Calcular los puntos anotados por los jugadores"""
     total = 0
     for jugador in estadisticas_jugadores:
-        total += jugador [0]
+        total = total + jugador [0]
     return total
 
+def calcular_promedios_estadisticas(matriz):
+    """Calcula el promedio de cada estadistica de todos los jugadores"""
 
-#4. Función principal del programa ----------------------------------------
+    promedios = []
+
+    # Recorrer las columnas de la matriz
+    for columna in range(len(matriz[0])):
+
+        suma = 0
+
+        # Recorrer las filas de la matriz
+        for fila in matriz:
+            suma = suma + fila[columna]
+
+        promedio = suma / len(matriz)
+        promedios.append(promedio)
+
+    return promedios
+
+
+#4. Función principal del programa ---------------------------------------
 
 while True:
     print("Estadisticas del equipo")
@@ -211,12 +236,23 @@ while True:
 #Calcular los puntos totales con la matriz
     puntos_totales = calcular_puntos_totales(estadisticas_jugadores)
 
+#Calcular los promedios de cada estadistica
+    promedios_estadisticas = calcular_promedios_estadisticas(
+        estadisticas_jugadores
+    )
+
+
 #Mostrar los resultados generales del equipo
     print("\nResultados generales del equipo")
     print("Cantidad de jugadores", cantidad_jugadores)
     print("Puntos totales anotados", puntos_totales)
     print("Promedio del desempeño total de equipo", round(promedio_equipo, 2))
 
+#Mostrar los promedios de las estadisticas
+    print("\nPromedios de estadisticas del equipo")
+
+    for i in range(len(promedios_estadisticas)):
+        print(nombres_estadisticas[i] + ":", round(promedios_estadisticas[i], 2))
 
 # Preguntar si el usuario desea evaluar otro grupo de jugadores
 
