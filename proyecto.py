@@ -22,11 +22,8 @@ Valor_Perdidas = -1.5
 Valor_Tapones = 2
 Valor_Faltas = -3
 
-nombres_estadisticas = [
-    "Puntos", "Asistencias", "Rebotes", "Robos",
-    "Pases fallidos", "Puntos de 3", "Perdidas",
-    "Tapones", "Faltas"
-]
+nombres_estadisticas = ["Puntos", "Asistencias", "Rebotes", "Robos",
+    "Pases fallidos", "Puntos de 3", "Perdidas", "Tapones", "Faltas"]
 
 #3. Funciones ---------------------------------------------------------------------
 
@@ -149,64 +146,65 @@ def calcular_promedios_estadisticas(matriz):
     return promedios
 
 
-#4. Función principal del programa ---------------------------------------
+#Función para pedir la cantidad de jugadores
 
-while True:
-    print("Estadisticas del equipo")
+def pedir_cantidad_jugadores():
+    """Solicita y valida la cantidad de jugadores a evaluar"""
 
-    # Preguntar cuantos jugadores se evaluaran
     while True:
         try:
-            cantidad_jugadores = int(
+            cantidad = int(
                 input("¿Cuantos jugadores deseas evaluar? (1-5): ")
             )
 
-# Verificar que la cantidad este entre 1 y 5
-            if 1 <= cantidad_jugadores <= 5:
-                break
+            if 1 <= cantidad <= 5:
+                return cantidad
 
             print("Error: debes ingresar un numero del 1 al 5.")
 
-# Evitar que el programa se detenga si se ingresan letras
         except ValueError:
             print("Error: debes ingresar un numero entero.")
 
-# Crear una lista vacia para almacenar los datos de los jugadores
+
+#Función para registrar a todos los jugadores
+
+def registrar_jugadores(cantidad_jugadores):
+    """Registra nombres, estadisticas, puntuaciones y calificaciones"""
+
     nombres = []
     estadisticas_jugadores = []
     puntuaciones = []
     calificaciones = []
-    contador = 1
 
-# Registrar las estadísticas de cada jugador
     for i in range(cantidad_jugadores):
 
         print("\nJugador", i + 1)
 
         nombre = str(input("Nombre del jugador: "))
 
-# Guardar las estadisticas como una lista
         estadisticas = obtener_estadisticas()
 
-# Agregar los datos a sus respectivas listas
+        # Guardar los datos en sus respectivas listas
         nombres.append(nombre)
         estadisticas_jugadores.append(estadisticas)
 
         puntuacion = calcular_desempeno(*estadisticas)
-
-# Guardar la puntuacion en una lista
         puntuaciones.append(puntuacion)
 
-# guardar la calificacion en una lista
         calificacion = obtener_calificacion(puntuacion)
         calificaciones.append(calificacion)
 
+    return nombres, estadisticas_jugadores, puntuaciones, calificaciones
 
-#Mostrar resultados de cada jugador
+
+#Función para mostrar los resultados de todos los jugadores
+
+def mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones):
+    """Muestra los resultados individuales de todos los jugadores"""
 
     print("\nResultados de los jugadores")
 
-    for i in range(cantidad_jugadores):
+    for i in range(len(nombres)):
 
         mostrar_resultado(
             nombres[i],
@@ -214,7 +212,12 @@ while True:
             calificaciones[i]
         )
 
-# Encontrar al mejor jugador usando su indice
+
+#Función para encontrar al mejor jugador
+
+def encontrar_mejor_jugador(puntuaciones):
+    """Encuentra el indice del jugador con mayor puntuacion"""
+
     mejor_indice = 0
 
     for i in range(1, len(puntuaciones)):
@@ -222,57 +225,117 @@ while True:
         if puntuaciones[i] > puntuaciones[mejor_indice]:
             mejor_indice = i
 
-    print("\nMejor desempeno")
+    return mejor_indice
 
-# Usar el mismo indice en las listas
+
+#Función para mostrar al mejor jugador
+
+def mostrar_mejor_jugador(nombres, puntuaciones, calificaciones):
+    """Muestra al jugador con el mejor desempeño"""
+
+    mejor_indice = encontrar_mejor_jugador(puntuaciones)
+
+    print("\nMejor desempeno")
     print("Jugador:", nombres[mejor_indice])
     print("Puntuacion:", puntuaciones[mejor_indice])
     print("Calificacion:", calificaciones[mejor_indice], "/ 10")
 
 
-#Calcular el promedio del equipo
-    promedio_equipo = calcular_promedio_equipo(puntuaciones)
 
-#Calcular los puntos totales con la matriz
-    puntos_totales = calcular_puntos_totales(estadisticas_jugadores)
+#Función para mostrar los promedios de las estadísticas
 
-#Calcular los promedios de cada estadistica
+def mostrar_promedios_estadisticas(estadisticas_jugadores):
+    """Muestra el promedio de cada estadistica del equipo"""
+
     promedios_estadisticas = calcular_promedios_estadisticas(
         estadisticas_jugadores
     )
 
-
-#Mostrar los resultados generales del equipo
-    print("\nResultados generales del equipo")
-    print("Cantidad de jugadores", cantidad_jugadores)
-    print("Puntos totales anotados", puntos_totales)
-    print("Promedio del desempeño total de equipo", round(promedio_equipo, 2))
-
-#Mostrar los promedios de las estadisticas
     print("\nPromedios de estadisticas del equipo")
 
     for i in range(len(promedios_estadisticas)):
-        print(nombres_estadisticas[i] + ":", round(promedios_estadisticas[i], 2))
+        print(
+            nombres_estadisticas[i] + ":",
+            round(promedios_estadisticas[i], 2)
+        )
 
-# Preguntar si el usuario desea evaluar otro grupo de jugadores
+
+#Función para mostrar los resultados generales del equipo
+
+def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
+                                    estadisticas_jugadores):
+    """Muestra los resultados generales del equipo"""
+
+    promedio_equipo = calcular_promedio_equipo(puntuaciones)
+
+    puntos_totales = calcular_puntos_totales(estadisticas_jugadores)
+
+    print("\nResultados generales del equipo")
+    print("Cantidad de jugadores:", cantidad_jugadores)
+    print("Puntos totales anotados:", puntos_totales)
+    print("Promedio del desempeño total del equipo:", round(promedio_equipo, 2))
+
+    mostrar_promedios_estadisticas(estadisticas_jugadores)
+
+
+
+#Función para preguntar si se desea continuar
+
+def preguntar_continuar():
+    """Pregunta si el usuario desea realizar otra busqueda"""
 
     while True:
 
-            continuar = input(
-        "\n¿Deseas realizar otra busqueda? (si/no): "
-    ).lower()
+        continuar = input(
+            "\n¿Deseas realizar otra busqueda? (si/no): "
+        ).lower()
 
-            if continuar == "si":
-                break
+        if continuar == "si":
+            return True
 
-            elif continuar == "no":
-                print("Calculo finalizado ")
-                break
+        elif continuar == "no":
+            print("Calculo finalizado")
+            return False
 
-            else:
-# Volver a preguntar si la opcion ingresada no es valida
-                print("Opcion invalida. Ingresa 'si' o 'no'.")
+        else:
+            print("Opcion invalida. Ingresa 'si' o 'no'.")
 
-# Finalizar el ciclo principal si el usuario decide salir
-    if continuar == "no":
-            break
+
+#4. Función principal del programa ---------------------------------------
+
+while True:
+
+    print("\nEstadisticas del equipo")
+
+    # Solicitar la cantidad de jugadores
+    cantidad_jugadores = pedir_cantidad_jugadores()
+
+    # Registrar los jugadores y sus estadísticas
+    nombres, estadisticas_jugadores, puntuaciones, calificaciones = (
+        registrar_jugadores(cantidad_jugadores)
+    )
+
+    # Mostrar resultados individuales
+    mostrar_resultados_jugadores(
+        nombres,
+        puntuaciones,
+        calificaciones
+    )
+
+    # Mostrar al mejor jugador
+    mostrar_mejor_jugador(
+        nombres,
+        puntuaciones,
+        calificaciones
+    )
+
+    # Mostrar resultados generales del equipo
+    mostrar_resultados_equipo(
+        cantidad_jugadores,
+        puntuaciones,
+        estadisticas_jugadores
+    )
+
+    # Preguntar si se desea realizar otra búsqueda
+    if preguntar_continuar() == False:
+        break
