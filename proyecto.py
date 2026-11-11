@@ -7,8 +7,8 @@ O hasta el desempeño de todo un equipo de 5 personas
 
 #1. Importaciones ---------------------------------------------------------------
 
-print("Bienvenido al programa para calcular el desempeño" \
-" de tu equipo de basquetbol de hasta 5 personas")
+print("Bienvenido al programa para calcular el desempeño"
+        " de tu equipo de basquetbol de hasta 5 personas")
 
 #2. Variables globales y Constantes ---------------------------------------------
 
@@ -28,7 +28,7 @@ nombres_estadisticas = ["Puntos", "Asistencias", "Rebotes", "Robos",
 
 #3. Funciones ---------------------------------------------------------------------
 
-#Función para pedir y validar datos de los jugadores
+# Función para pedir y validar datos de los jugadores
 
 def pedir_dato(mensaje):
     """Pide un dato al usuario y valida que no sea un numero entero negativo"""
@@ -40,10 +40,11 @@ def pedir_dato(mensaje):
             print("Dato invalido. Por favor, ingresa un numero positivo.")
 
         except ValueError:
-            print("El valor debe ser un numero entero positivo. Intente de nuevo.")
+            print("El valor debe ser un numero entero positivo." \
+            " Intente de nuevo.")
 
 
-#Función para pedir la cantidad de jugadores
+# Función para pedir la cantidad de jugadores
 
 def pedir_cantidad_jugadores():
     """Solicita y valida la cantidad de jugadores a evaluar"""
@@ -63,7 +64,7 @@ def pedir_cantidad_jugadores():
             print("Error: debes ingresar un numero entero.")
 
 
-#Función para manipular cadenas de texto
+# Función para manipular cadenas de texto
 
 def manipular_nombre(nombre):
     """Muestra y manipula diferentes partes del nombre del jugador."""
@@ -87,7 +88,7 @@ def manipular_nombre(nombre):
     print("Nombre separado:", palabras)
 
 
-#Función para obtener estadísticas de cada jugador
+# Función para obtener estadísticas de cada jugador
 
 def obtener_estadisticas():
     """Solicita estadisticas a evaluar de cada jugador"""
@@ -106,7 +107,7 @@ def obtener_estadisticas():
             perdidas, tapones, faltas]
 
 
-#Función para calcular el desempeño de cada jugador
+# Función para calcular el desempeño de cada jugador
 
 def calcular_desempeno(puntos, asistencias, rebotes, 
                     robos, pase_fallido, puntos_tres, 
@@ -127,7 +128,7 @@ def calcular_desempeno(puntos, asistencias, rebotes,
     return puntuacion
 
 
-#Función para obtener calificación de cada jugador
+# Función para obtener calificación de cada jugador
 
 def obtener_calificacion(puntuacion):
     """Convierte la calificacion en una puntuacion del 1 al 10"""
@@ -140,13 +141,13 @@ def obtener_calificacion(puntuacion):
         calificacion = 6
     elif puntuacion >= 0:
         calificacion = 4
-    else: 
+    else:
         calificacion = 1
-        
+    
     return calificacion
 
 
-#Función para registrar a todos los jugadores
+# Función para registrar a todos los jugadores
 
 def registrar_jugadores(cantidad_jugadores):
     """Registra nombres, estadisticas, puntuaciones y calificaciones"""
@@ -179,25 +180,25 @@ def registrar_jugadores(cantidad_jugadores):
     return nombres, estadisticas_jugadores, puntuaciones, calificaciones
 
 
-#Funciones para calcular el promedio del equipo
+# Funciones para calcular el promedio del equipo
 
-def calcular_promedio_equipo (puntuaciones):
+def calcular_promedio_equipo(puntuaciones):
     """Calcular el promedio del desempeño de todos los jugadores"""
     suma_puntuaciones = 0
     for puntuacion in puntuaciones:
         suma_puntuaciones = suma_puntuaciones + puntuacion
-    promedio = suma_puntuaciones /len (puntuaciones)
+    promedio = suma_puntuaciones / len(puntuaciones)
     return promedio
 
 
-#Funciones para calcular los puntos totales del equipo
-#usando la lista anidada de estadísticas
+# Funciones para calcular los puntos totales del equipo
+# usando la lista anidada de estadísticas
 
 def calcular_puntos_totales(estadisticas_jugadores):
     """Calcular los puntos anotados por los jugadores"""
     total = 0
     for jugador in estadisticas_jugadores:
-        total = total + jugador [0]
+        total = total + jugador[0]
     return total
 
 
@@ -223,7 +224,7 @@ def calcular_promedios_estadisticas(matriz):
     return promedios
 
 
-#Función para encontrar al mejor jugador
+# Función para encontrar al mejor jugador
 
 def encontrar_mejor_jugador(puntuaciones):
     """Encuentra el indice del jugador con mayor puntuacion"""
@@ -238,7 +239,7 @@ def encontrar_mejor_jugador(puntuaciones):
     return mejor_indice
 
 
-#Función para mostrar el resultado de cada jugador
+# Función para mostrar el resultado de cada jugador
 
 def mostrar_resultado(nombre, puntuacion, calificacion):
     """Muestra el resultado y calificacion del jugador"""
@@ -249,7 +250,7 @@ def mostrar_resultado(nombre, puntuacion, calificacion):
     print("Calificacion:", calificacion, "/ 10")
 
 
-#Función para mostrar los resultados de todos los jugadores
+# Función para mostrar los resultados de todos los jugadores
 
 def mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones):
     """Muestra los resultados individuales de todos los jugadores"""
@@ -265,7 +266,7 @@ def mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones):
         )
 
 
-#Función para mostrar al mejor jugador
+# Función para mostrar al mejor jugador
 
 def mostrar_mejor_jugador(nombres, puntuaciones, calificaciones):
     """Muestra al jugador con el mejor desempeño"""
@@ -278,7 +279,7 @@ def mostrar_mejor_jugador(nombres, puntuaciones, calificaciones):
     print("Calificacion:", calificaciones[mejor_indice], "/ 10")
 
 
-#Función para mostrar los promedios de las estadísticas
+# Función para mostrar los promedios de las estadísticas
 
 def mostrar_promedios_estadisticas(estadisticas_jugadores):
     """Muestra el promedio de cada estadistica del equipo"""
@@ -296,7 +297,7 @@ def mostrar_promedios_estadisticas(estadisticas_jugadores):
         )
 
 
-#Función para mostrar los resultados generales del equipo
+# Función para mostrar los resultados generales del equipo
 
 def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
                                     estadisticas_jugadores):
@@ -309,12 +310,13 @@ def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
     print("\nResultados generales del equipo")
     print("Cantidad de jugadores:", cantidad_jugadores)
     print("Puntos totales anotados:", puntos_totales)
-    print("Promedio del desempeño total del equipo:", round(promedio_equipo, 2))
+    print("Promedio del desempeño total del equipo:",
+        round(promedio_equipo, 2))
 
     mostrar_promedios_estadisticas(estadisticas_jugadores)
 
 
-#Función para preguntar si se desea continuar
+# Función para preguntar si se desea continuar
 
 def preguntar_continuar():
     """Pregunta si el usuario desea realizar otra busqueda"""
@@ -372,5 +374,5 @@ while True:
     )
 
     # Preguntar si se desea realizar otra búsqueda
-    if preguntar_continuar() == False:
+    if preguntar_continuar():
         break

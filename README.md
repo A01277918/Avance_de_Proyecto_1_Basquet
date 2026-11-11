@@ -1,13 +1,12 @@
-# Avance\_Proyecto\_1\_Basquetbol
-
+# Avance_Proyecto_1_Basquetbol
 
 # Estadísticas de jugadores de básquetbol
 
-## Contexto
+# Contexto
 
 Escogí el tema del básquetbol porque es un deporte que me gusta mucho y que considero muy interesante, no solamente por jugarlo, sino también por todo lo que pasa dentro de un partido. Me gusta la emoción de los partidos, las jugadas, los tiros de tres, las asistencias y la forma en la que cada jugador puede aportar algo diferente a su equipo. Además, creo que el básquetbol es un deporte en el que las estadísticas tienen mucha importancia, ya que muchas veces sirven para saber qué tan bien jugó una persona y qué fue lo que aportó durante el partido.
 
-Por eso, en este proyecto quise desarrollar un programa que permita registrar y calcular las estadísticas de 5 jugadores de básquetbol durante un partido. Algunas de las estadísticas que se van a tomar en cuenta son los puntos, asistencias, rebotes, robos, pases fallidos, puntos de tres y pérdidas de balón. Al final, el programa utilizará estos datos para obtener una puntuación del desempeño de cada jugador del 1 al 10, siendo 10 la mejor calificación.
+Por eso, en este proyecto quise desarrollar un programa que permita registrar y calcular las estadísticas de hasta 5 jugadores de básquetbol durante un partido. Algunas de las estadísticas que se van a tomar en cuenta son los puntos, asistencias, rebotes, robos, pases fallidos, puntos de tres y pérdidas de balón. Al final, el programa utilizará estos datos para obtener una puntuación del desempeño de cada jugador del 1 al 10, siendo 10 la mejor calificación.
 
 ¿Por qué es interesante?
 
@@ -21,7 +20,7 @@ Este proyecto también me parece una buena forma de utilizar lo que voy aprendie
 
 Este programa consiste en desarrollar un programa en Python para calcular el desempeño de jugadores de baloncesto a partir de diferentes estadísticas obtenidas durante el partido.
 
-El programa asigna un valor diferente a cada estadística y utiliza estos valores para calcular una puntuación de desempeño. Después de obtener la estadísticas de cada uno de los parámetros se convierten en un puntuación del 1 al 10.
+El programa asigna un valor diferente a cada estadística y utiliza estos valores para calcular una puntuación de desempeño. Después de obtener las estadísticas de cada jugador, el programa calcula una puntuación de desempeño utilizando los valores asignados a cada estadística. Posteriormente, convierte esa puntuación en una calificación del 1 al 10.
 
 El proyecto tiene objetivo aplicar conocimientos básicos de programación tales como:
 
@@ -56,64 +55,45 @@ Falta	              -3
 
 Estos valores se utilizan dentro del programa como constantes, para calcular la puntuación de desempeño de cada jugador
 
-## Función Actual
+## Funciones Actualizadas
 
-El programa tiene varias funciones para hacer pequeñas tareas especificas
+## Funciones actuales
 
-pedir_dato()
+El programa cuenta con las siguientes funciones:
 
-Solicita un dato al usuario y verifica que sea un numero entero no negativo
+1. pedir_dato(mensaje): Solicita un dato al usuario y valida que sea un número entero no negativo.
 
-Si el usuario introduce un numero incorrecto, el programa muestra un mensaje de error y vuelve a solicitar un dato hasta recibir un dato válido.
+2. pedir_cantidad_jugadores(): Solicita la cantidad de jugadores que se van a evaluar y valida que sea entre 1 y 5.
 
-obtener_estadisticas()
+3. manipular_nombre(nombre): Realiza diferentes operaciones con el nombre del jugador, como obtener su longitud, dividirlo en partes y cambiarlo a mayúsculas o minúsculas.
 
-solicita las estadísticas del jugador utilizando la función pedir_dato
+4. obtener_estadisticas(): Solicita las nueve estadísticas de cada jugador y utiliza la función pedir_dato() para validar los datos.
 
-Actualmente solicita:
+5. calcular_desempeno(...): Calcula la puntuación de desempeño de cada jugador utilizando los valores establecidos para las estadísticas.
 
-Puntos.
-Asistencias.
-Rebotes.
-Robos.
-Pases fallidos.
-Puntos de 3.
-Pérdidas de balón.
-Tiros bloqueados.
-Faltas cometidas.
+6. obtener_calificacion(puntuacion): Convierte la puntuación de desempeño en una calificación del 1 al 10.
 
+7. registrar_jugadores(cantidad_jugadores): Registra los nombres y las estadísticas de los jugadores, y almacena sus puntuaciones y calificaciones.
 
-calcular desempeño()
+8. calcular_promedio_equipo(puntuaciones): Calcula el promedio de desempeño de todos los jugadores del equipo.
 
-Utiliza las estadísticas y los valores asignados a cada una para obtener la puntuación de desempeño del jugador
+9. calcular_puntos_totales(estadisticas_jugadores): Calcula la cantidad total de puntos anotados por todos los jugadores.
 
-Las estadísticas positivas ayudan a obtener una mejor puntuación y las negativas lo contrario
+10. calcular_promedios_estadisticas(matriz): Calcula el promedio de cada estadística utilizando los datos almacenados en una matriz o lista anidada.
 
-obtener_calificacion()
+11. encontrar_mejor_jugador(puntuaciones): Identifica la posición del jugador que obtuvo la puntuación más alta.
 
-Convierte la puntuación de desempeño del 1 al 10 mediante condiciones.
+12. mostrar_resultado(nombre, puntuacion, calificacion): Muestra el nombre, la puntuación y la calificación de un jugador.
 
-La escala utilizada es: 
+13. mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones): Muestra los resultados individuales de todos los jugadores.
 
-Puntuación	   Calificación
-30 o más	      10
-20 a 29	      8
-10 a 19	      6
-0 a 9	         4
-Menor que 0	   1
+14. mostrar_mejor_jugador(nombres, puntuaciones, calificaciones): Muestra al jugador con el mejor desempeño y su puntuación.
 
+15. mostrar_promedios_estadisticas(estadisticas_jugadores): Muestra el promedio de cada una de las estadísticas del equipo.
 
-mostrar_resultado()
+16. mostrar_resultados_equipo(cantidad_jugadores, puntuaciones, estadisticas_jugadores): Muestra los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y los promedios.
 
-Muestra el nombre del jugador, su puntuación y calificación del desempeño del jugador
-
-calcular_promedio_equipo()
-
-Calcula el promedio de las puntuaciones de desempeño de los jugadores registrados, para llegar a eso se suma las puntuaciones de los jugadores y divide el resultado entre la cantidad de jugadores evaluados.
-
-calcular_puntos_totales()
-
-Calcula el total de puntos anotados por los jugadores registrados, para llegar a eso recorre las estadísticas almacenadas de cada jugador y suma los puntos anotados.
+17. preguntar_continuar(): Pregunta al usuario si desea realizar otra evaluación o finalizar el programa.
 
 ## Estructura del Repositorio
 
@@ -171,28 +151,31 @@ El proyecto se encuentra actualmente en desarrollo.
 Hasta este punto se han implementado:
 
 Las constantes correspondientes al valor de cada estadística.
-Una función para solicitar y validar datos.
-Una función para obtener las estadísticas de un jugador.
-Una función para calcular el desempeño.
-Una función para convertir el desempeño en una calificación.
-Una función para mostrar los resultados.
+Una función para solicitar y validar datos ingresados por el usuario.
 La posibilidad de seleccionar la cantidad de jugadores que se van a evaluar, siendo el mínimo 1 y el máximo 5.
+Una función para manipular y mostrar diferentes partes del nombre de cada jugador.
+Una función para obtener las nueve estadísticas de cada jugador.
 El almacenamiento de los nombres de los jugadores.
-El almacenamiento de las estadísticas, puntuaciones y calificaciones mediante listas.
-Un ciclo para solicitar y procesar la información de cada jugador.
-La comparación de las puntuaciones para identificar al jugador con mejor desempeño.
-El cálculo del promedio de desempeño del equipo.
+El almacenamiento de las estadísticas mediante listas anidadas.
+El cálculo de la puntuación de desempeño de cada jugador.
+La conversión de la puntuación en una calificación del 1 al 10.
+El almacenamiento de las puntuaciones y calificaciones de los jugadores.
 El cálculo de los puntos totales anotados por los jugadores.
+El cálculo del promedio de desempeño del equipo.
+El cálculo del promedio de cada estadística de todos los jugadores.
+La comparación de las puntuaciones para identificar al jugador con mejor desempeño.
+La presentación de los resultados individuales de cada jugador.
+La presentación de los resultados generales del equipo.
 La opción de realizar una nueva evaluación o finalizar el programa.
-
 
 ## Próximos pasos
 
 La siguiente etapa del proyecto consiste en continuar mejorando el programa para:
 
-Mejorar la presentación de los resultados.
-Agregar nuevas funcionalidades que permitan analizar el desempeño de los jugadores.
-Continuar desarrollando el proyecto conforme a los conocimientos adquiridos en programación.
+Mejorar la presentación visual de los resultados.
+Incorporar nuevas estadísticas que permitan analizar el desempeño de los jugadores.
+Ampliar las funcionalidades para realizar un análisis más completo del equipo.
+Continuar desarrollando el proyecto conforme a los conocimientos adquiridos en programación
 
 
 ## Licencia
@@ -207,7 +190,6 @@ Este proyecto utiliza la licencia MIT. Para consultar los términos completos, r
 2. Mostrar una bienvenida al usuario.
 
 3. Definir los valores constantes de cada estadística
-
 Punto = 1
 Asistencia = 0.8
 Rebote = 0.5
@@ -226,46 +208,44 @@ Falta = -3
 
 7. Solicitar el nombre de cada jugador.
 
-8. Solicitar las estadísticas de cada jugador mediante la función obtener_estadisticas().
+8. Mostrar y manipular diferentes partes del nombre del jugador, utilizando operaciones con cadenas de texto.
 
-9. Validar cada dato ingresado
+9. Solicitar las estadísticas de cada jugador mediante la función obtener_estadisticas().
+
+10. Validar cada dato ingresado
 
 Verificar que sea un número entero.
 Verificar que no sea negativo.
 Si el dato es incorrecto, mostrar un mensaje de error y solicitarlo nuevamente.
 
-10. Calcular la puntuación de desempeño de cada jugador utilizando el valor correspondiente de cada estadística.
+11. Calcular la puntuación de desempeño de cada jugador utilizando el valor correspondiente de cada estadística.
 
-Valor_Punto = 1
-Valor_Asistencias = 0.8
-Valor_Rebotes = 0.5
-Valor_Robos = 1.5
-Valor_Pase_Fallido = -2
-Valor_Triple = 3
-Valor_Perdidas = -1.5
-Valor_Tapones = 2
-Valor_Faltas = -3
+12. Convertir la puntuación de desempeño en una calificación del 1 al 10 mediante condiciones.
 
-11. Convertir la puntuación de desempeño en una calificación del 1 al 10 mediante condiciones.
+13. Guardar la información correspondiente de cada jugador en las listas correspondientes.
 
-12. Guardar la información correspondiente de cada jugador en las listas correspondientes.
+14. Mostrar el nombre, la puntuación y la calificación de cada jugador.
 
-13. Mostrar el nombre, la puntuación y la calificación de cada jugador.
+15. Comparar las puntuaciones de los jugadores registrados.
 
-14. Comparar las puntuaciones con los jugadores registrados.
+16. Identificar al jugador con el mejor desempeño.
 
-15. Identificar al jugador con el mejor desempeño.
+17. Mostrar al jugador con mayor puntuación y su calificación.
 
-16. Mostrar al jugador con mayor puntuación y su calificación.
+18. Calcular el promedio de las puntuaciones de desempeño de los jugadores registrados.
 
-17. Calcular el promedio de las puntuaciones de desempeño de los jugadores registrados.
+19. Calcular los puntos totales anotados por todos los jugadores registrados.
 
-18. Calcular los puntos totales anotados por todos los jugadores registrados.
+20. Calcular el promedio de cada estadística de todos los jugadores utilizando una matriz o lista anidada.
 
-19. Mostrar el promedio de desempeño del equipo y los puntos totales anotados.
+21. Mostrar los promedios de cada estadística del equipo.
 
-20. Preguntar al usuario si quiere realizar otra evaluación.
+22. Mostrar los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y el promedio de desempeño.
 
-21. Si el usuario desea realizar otra evaluación, regresar al proceso de registro de jugadores.
+Al finalizar:
 
-22. Si el usuario no desea realizar otra evaluación, finalizar el programa.
+23. Preguntar al usuario si desea realizar otra evaluación.
+
+24. El usuario desea realizar otra evaluación, regresar al proceso de registro de jugadores.
+
+25. Si el usuario no desea realizar otra evaluación, finalizar el programa.
