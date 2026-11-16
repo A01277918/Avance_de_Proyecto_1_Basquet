@@ -1,4 +1,5 @@
 #Encabezado --------------------------------------------------------------------
+
 """
 Este proyecto esta echo por José Alberto Juárez Palazuelos
 Este Programa es para calcular el desempeño de un jugador de baloncesto
@@ -7,8 +8,6 @@ O hasta el desempeño de todo un equipo de 5 personas
 
 #1. Importaciones ---------------------------------------------------------------
 
-print("Bienvenido al programa para calcular el desempeño"
-        " de tu equipo de basquetbol de hasta 5 personas")
 
 #2. Variables globales y Constantes ---------------------------------------------
 
@@ -28,20 +27,52 @@ nombres_estadisticas = ["Puntos", "Asistencias", "Rebotes", "Robos",
 
 #3. Funciones ---------------------------------------------------------------------
 
+
 # Función para pedir y validar datos de los jugadores
 
 def pedir_dato(mensaje):
     """Pide un dato al usuario y valida que no sea un numero entero negativo"""
     while True:
         try:
-            dato = int(input(mensaje))
-            if dato >= 0:
+            entrada = input(mensaje).strip()
+
+            dato = int(entrada)
+
+            if dato < 0 or dato > 99:
+                print("Error: el valor debe estar entre 0 y 99.")
+
+            elif entrada.count(".") > 1:
+                print("Error: formato numérico invalido.")
+
+            else:
                 return dato
-            print("Dato invalido. Por favor, ingresa un numero positivo.")
 
         except ValueError:
-            print("El valor debe ser un numero entero positivo." \
-            " Intente de nuevo.")
+            print("Error: debes ingresar un numero valido.")
+
+
+# Función para solicitar y validar el nombre del jugador.
+
+def pedir_nombre():
+    """Solicita un nombre de máximo 30 caracteres y valida que solo tenga letras y espacios."""
+
+    while True:
+        nombre = input("Nombre del jugador: ").strip()
+
+        if len(nombre) == 0:
+            print("Error: el nombre no puede estar vacío.")
+
+        elif len(nombre) > 30:
+            print("Error: el nombre no puede superar los 30 caracteres.")
+
+        #isalpha() Comprueba que cada carácter sea una letra, incluyendo letras con acentos.
+        #isspace() Permite utilizar espacios.
+        elif not all(letra.isalpha() or letra.isspace()
+                    for letra in nombre):
+            print("Error: el nombre solo puede contener letras y espacios.")
+
+        else:
+            return nombre
 
 
 # Función para pedir la cantidad de jugadores
@@ -69,19 +100,19 @@ def pedir_cantidad_jugadores():
 def manipular_nombre(nombre):
     """Muestra y manipula diferentes partes del nombre del jugador."""
 
-    print("\n--- Informacion del nombre del jugador ---")
+    print("\n--- Información del nombre del jugador ---")
 
     # Muestra el nombre y sus caracteres
     print("Nombre:", nombre)
-    print("Primer caracter:", nombre[0])
+    print("Primer carácter:", nombre[0])
     print("Tamaño del nombre:", len(nombre))
 
     # Muestra una parte del nombre
     print("Primeras 5 letras:", nombre[0:5])
 
-    # Convierte el nombre a mayusculas y minusculas
-    print("Nombre en mayusculas:", nombre.upper())
-    print("Nombre en minusculas:", nombre.lower())
+    # Convierte el nombre a mayúsculas y minúsculas
+    print("Nombre en mayúsculas:", nombre.upper())
+    print("Nombre en minúsculas:", nombre.lower())
 
     # Separa el nombre y los apellidos
     palabras = nombre.split()
@@ -91,14 +122,14 @@ def manipular_nombre(nombre):
 # Función para obtener estadísticas de cada jugador
 
 def obtener_estadisticas():
-    """Solicita estadisticas a evaluar de cada jugador"""
+    """Solicita estadísticas a evaluar de cada jugador"""
     puntos = pedir_dato("Puntos: ")
     asistencias = pedir_dato("Asistencias: ")
     rebotes = pedir_dato("Rebotes: ")
     robos = pedir_dato("Robos: ")
     pase_fallido = pedir_dato("Pases fallidos: ")
     puntos_tres = pedir_dato("Puntos de 3: ")
-    perdidas = pedir_dato("Perdidas de balon: ")
+    perdidas = pedir_dato("Perdidas de balón: ")
     tapones = pedir_dato("Tiros bloqueados: ")
     faltas = pedir_dato("Faltas cometidas: ")
 
@@ -113,7 +144,7 @@ def calcular_desempeno(puntos, asistencias, rebotes,
                     robos, pase_fallido, puntos_tres, 
                     perdidas, tapones, faltas):
 
-    """Calculo de la puntuacion de desempeño del jugador"""
+    """Calculo de la puntuación de desempeño del jugador"""
 
     puntuacion = (puntos * VALOR_PUNTO 
                     + asistencias * VALOR_ASISTENCIAS 
@@ -131,7 +162,7 @@ def calcular_desempeno(puntos, asistencias, rebotes,
 # Función para obtener calificación de cada jugador
 
 def obtener_calificacion(puntuacion):
-    """Convierte la calificacion en una puntuacion del 1 al 10"""
+    """Convierte la calificación en una puntuación del 1 al 10"""
 
     if puntuacion >= 30:
         calificacion = 10
@@ -150,7 +181,7 @@ def obtener_calificacion(puntuacion):
 # Función para registrar a todos los jugadores
 
 def registrar_jugadores(cantidad_jugadores):
-    """Registra nombres, estadisticas, puntuaciones y calificaciones"""
+    """Registra nombres, estadísticas, puntuaciones y calificaciones"""
 
     nombres = []
     estadisticas_jugadores = []
@@ -161,9 +192,7 @@ def registrar_jugadores(cantidad_jugadores):
 
         print("\nJugador", i + 1)
 
-        nombre = str(input("Nombre del jugador: "))
-
-        manipular_nombre(nombre)
+        nombre = pedir_nombre()
 
         estadisticas = obtener_estadisticas()
 
@@ -205,7 +234,7 @@ def calcular_puntos_totales(estadisticas_jugadores):
 # Función para calcular el promedio de cada estadística de todos los jugadores
 
 def calcular_promedios_estadisticas(matriz):
-    """Calcula el promedio de cada estadistica de todos los jugadores"""
+    """Calcula el promedio de cada estadística de todos los jugadores"""
 
     promedios = []
 
@@ -227,7 +256,7 @@ def calcular_promedios_estadisticas(matriz):
 # Función para encontrar al mejor jugador
 
 def encontrar_mejor_jugador(puntuaciones):
-    """Encuentra el indice del jugador con mayor puntuacion"""
+    """Encuentra el indice del jugador con mayor puntuación"""
 
     mejor_indice = 0
 
@@ -242,12 +271,12 @@ def encontrar_mejor_jugador(puntuaciones):
 # Función para mostrar el resultado de cada jugador
 
 def mostrar_resultado(nombre, puntuacion, calificacion):
-    """Muestra el resultado y calificacion del jugador"""
+    """Muestra el resultado y calificación del jugador"""
 
     print()
     print("Jugador:", nombre)
-    print("Puntuacion:", puntuacion)
-    print("Calificacion:", calificacion, "/ 10")
+    print("Puntuación:", puntuacion)
+    print("Calificación:", calificacion, "/ 10")
 
 
 # Función para mostrar los resultados de todos los jugadores
@@ -273,22 +302,22 @@ def mostrar_mejor_jugador(nombres, puntuaciones, calificaciones):
 
     mejor_indice = encontrar_mejor_jugador(puntuaciones)
 
-    print("\nMejor desempeno")
+    print("\nMejor desempeño")
     print("Jugador:", nombres[mejor_indice])
-    print("Puntuacion:", puntuaciones[mejor_indice])
-    print("Calificacion:", calificaciones[mejor_indice], "/ 10")
+    print("Puntuación:", puntuaciones[mejor_indice])
+    print("Calificación:", calificaciones[mejor_indice], "/ 10")
 
 
 # Función para mostrar los promedios de las estadísticas
 
 def mostrar_promedios_estadisticas(estadisticas_jugadores):
-    """Muestra el promedio de cada estadistica del equipo"""
+    """Muestra el promedio de cada estadística del equipo"""
 
     promedios_estadisticas = calcular_promedios_estadisticas(
         estadisticas_jugadores
     )
 
-    print("\nPromedios de estadisticas del equipo")
+    print("\nPromedios de estadísticas del equipo")
 
     for i in range(len(promedios_estadisticas)):
         print(
@@ -319,13 +348,13 @@ def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
 # Función para preguntar si se desea continuar
 
 def preguntar_continuar():
-    """Pregunta si el usuario desea realizar otra busqueda"""
+    """Pregunta si el usuario desea realizar otra búsqueda"""
 
     while True:
 
         continuar = input(
-            "\n¿Deseas realizar otra busqueda? (si/no): "
-        ).lower()
+            "\n¿Deseas realizar otra búsqueda? (si/no): "
+        ).lower().strip()
 
         if continuar == "si":
             return True
@@ -335,14 +364,17 @@ def preguntar_continuar():
             return False
 
         else:
-            print("Opcion invalida. Ingresa 'si' o 'no'.")
+            print("Opción invalida. Ingresa 'si' o 'no'.")
 
 
 #4. Función principal del programa ---------------------------------------
 
+print("Bienvenido al programa para calcular el desempeño"
+        " de tu equipo de basquetbol de hasta 5 personas")
+
 while True:
 
-    print("\nEstadisticas del equipo")
+    print("\nEstadísticas del equipo")
 
     # Solicitar la cantidad de jugadores
     cantidad_jugadores = pedir_cantidad_jugadores()
@@ -373,6 +405,8 @@ while True:
         estadisticas_jugadores
     )
 
-    # Preguntar si se desea realizar otra búsqueda
-    if preguntar_continuar():
+    # Preguntar si se desea realizar otra evaluación
+    continuar = preguntar_continuar()
+
+    if continuar == False:
         break
