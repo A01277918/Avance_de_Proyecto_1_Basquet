@@ -1,15 +1,24 @@
-#Encabezado --------------------------------------------------------------------
+#Encabezado ------------------------------------------------------------------
 
 """
-Este proyecto esta echo por José Alberto Juárez Palazuelos
-Este Programa es para calcular el desempeño de un jugador de baloncesto
-O hasta el desempeño de todo un equipo de 5 personas
+Proyecto elaborado por José Alberto Juárez Palazuelos.
+
+Este programa permite calcular y evaluar el desempeño de jugadores de baloncesto
+a partir de diferentes estadísticas individuales.
+
+Permite registrar de 1 hasta 5 jugadores, ingresar sus estadísticas
+y calcular una calificación de acuerdo con su rendimiento.
+
+También permite analizar el desempeño individual de cada jugador
+y obtener estadísticas generales del equipo.
 """
 
-#1. Importaciones ---------------------------------------------------------------
+#1. Importaciones ------------------------------------------------------------
 
+# Ninguna librería externa es necesaria para este proyecto
+# Pero se deja el encabezado para futuras importaciones si se requieren
 
-#2. Variables globales y Constantes ---------------------------------------------
+#2. Variables globales y Constantes ------------------------------------------
 
 #Constantes para calcular el desempeño del jugador
 VALOR_PUNTO = 1
@@ -22,16 +31,16 @@ VALOR_PERDIDAS = -1.5
 VALOR_TAPONES = 2
 VALOR_FALTAS = -3
 
-nombres_estadisticas = ["Puntos", "Asistencias", "Rebotes", "Robos",
+NOMBRES_ESTADISTICAS = ["Puntos", "Asistencias", "Rebotes", "Robos",
     "Pases fallidos", "Puntos de 3", "Perdidas", "Tapones", "Faltas"]
 
-#3. Funciones ---------------------------------------------------------------------
+#3. Funciones ----------------------------------------------------------------
 
 
 # Función para pedir y validar datos de los jugadores
 
 def pedir_dato(mensaje):
-    """Pide un dato al usuario y valida que no sea un numero entero negativo"""
+    """Solicita un nombre al usuario, lo normaliza y valida su formato."""
     while True:
         try:
             entrada = input(mensaje).strip()
@@ -41,9 +50,6 @@ def pedir_dato(mensaje):
             if dato < 0 or dato > 99:
                 print("Error: el valor debe estar entre 0 y 99.")
 
-            elif entrada.count(".") > 1:
-                print("Error: formato numérico invalido.")
-
             else:
                 return dato
 
@@ -51,28 +57,51 @@ def pedir_dato(mensaje):
             print("Error: debes ingresar un numero valido.")
 
 
+# Funciones para manipular cadenas de texto
+
+def normalizar_nombre(nombre):
+    """Limpia los espacios y organiza las mayúsculas del nombre."""
+
+    # strip() elimina los espacios al inicio y al final del texto.
+    # split() divide el texto en palabras, permite eliminar espacios extra
+    nombre = nombre.strip()
+    nombre = " ".join(nombre.split())
+    nombre = nombre.title()
+
+    return nombre
+
+
+def validar_nombre(nombre):
+    """Verifica que el nombre no esté vacío, no supere 30 caracteres
+    y contenga únicamente letras y espacios."""
+
+    if len(nombre) == 0 or len(nombre) > 30:
+        return False
+    # Verifica que cada carácter sea una letra o un espacio en blanco.
+    # isalpha() comprueba si el carácter es una letra.
+    # isspace() comprueba si el carácter es un espacio en blanco.
+    if not all(letra.isalpha() or letra.isspace()
+            for letra in nombre):
+        return False
+
+    return True
+
+
 # Función para solicitar y validar el nombre del jugador.
 
 def pedir_nombre():
-    """Solicita un nombre de máximo 30 caracteres y valida que solo tenga letras y espacios."""
+    """Solicita un nombre de máximo 30 caracteres y valida
+    que solo tenga letras y espacios."""
 
     while True:
-        nombre = input("Nombre del jugador: ").strip()
+        nombre = normalizar_nombre(
+            input("Nombre del jugador: ")
+        )
 
-        if len(nombre) == 0:
-            print("Error: el nombre no puede estar vacío.")
-
-        elif len(nombre) > 30:
-            print("Error: el nombre no puede superar los 30 caracteres.")
-
-        #isalpha() Comprueba que cada carácter sea una letra, incluyendo letras con acentos.
-        #isspace() Permite utilizar espacios.
-        elif not all(letra.isalpha() or letra.isspace()
-                    for letra in nombre):
-            print("Error: el nombre solo puede contener letras y espacios.")
-
-        else:
+        if validar_nombre(nombre):
             return nombre
+
+        print("Error: nombre inválido.")
 
 
 # Función para pedir la cantidad de jugadores
@@ -93,30 +122,6 @@ def pedir_cantidad_jugadores():
 
         except ValueError:
             print("Error: debes ingresar un numero entero.")
-
-
-# Función para manipular cadenas de texto
-
-def manipular_nombre(nombre):
-    """Muestra y manipula diferentes partes del nombre del jugador."""
-
-    print("\n--- Información del nombre del jugador ---")
-
-    # Muestra el nombre y sus caracteres
-    print("Nombre:", nombre)
-    print("Primer carácter:", nombre[0])
-    print("Tamaño del nombre:", len(nombre))
-
-    # Muestra una parte del nombre
-    print("Primeras 5 letras:", nombre[0:5])
-
-    # Convierte el nombre a mayúsculas y minúsculas
-    print("Nombre en mayúsculas:", nombre.upper())
-    print("Nombre en minúsculas:", nombre.lower())
-
-    # Separa el nombre y los apellidos
-    palabras = nombre.split()
-    print("Nombre separado:", palabras)
 
 
 # Función para obtener estadísticas de cada jugador
@@ -178,6 +183,86 @@ def obtener_calificacion(puntuacion):
     return calificacion
 
 
+# Función para leer los jugadores desde un archivo externo
+
+def leer_jugadores_archivo(nombre_archivo):
+    """Lee, normaliza y valida los nombres y estadísticas
+    de los jugadores desde un archivo."""
+    
+    # Crear listas vacías para almacenar los datos de los jugadores
+    nombres = []
+    estadisticas_jugadores = []
+    puntuaciones = []
+    calificaciones = []
+
+    try:
+        with open(nombre_archivo, "r", encoding="utf-8") as archivo:
+
+            for linea in archivo:
+
+                ## Ignorar las líneas que estén vacías
+                if linea.strip() == "":
+                    continue
+
+                ## Eliminar espacios y separar los datos mediante comas
+                datos = linea.strip().split(",")
+
+                if len(datos) != 10:
+                    print("Error: cada jugador debe tener 10 datos.")
+                    return None
+
+                nombre = normalizar_nombre(datos[0])
+                # Validar que el nombre no esté vacío
+                if not validar_nombre(nombre):
+                    print("Error: nombre inválido en el archivo.")
+                    return None
+
+                try:
+                    estadisticas = []
+
+                    # Convertir cada estadística de texto a entero
+                    for dato in datos[1:]:
+                        valor = int(dato.strip())
+
+                        if valor < 0 or valor > 99:
+                            print("Error: estadística fuera del rango.")
+                            return None
+
+                        estadisticas.append(valor)
+
+                except ValueError:
+                    print("Error: hay una estadística que no es entera.")
+                    return None
+
+                ## Guardar el nombre y las estadísticas del jugador
+                nombres.append(nombre)
+                estadisticas_jugadores.append(estadisticas)
+
+                # Calcular y guardar la puntuación de desempeño
+                puntuacion = calcular_desempeno(*estadisticas)
+                puntuaciones.append(puntuacion)
+
+                # Obtener y guardar la calificación del jugador
+                calificacion = obtener_calificacion(puntuacion)
+                calificaciones.append(calificacion)
+
+                # Verificar que el archivo no contenga más de 5 jugadores
+                if len(nombres) > 5:
+                    print("El archivo no puede tener más de 5 jugadores.")
+                    return None
+
+        # Verificar que el archivo contenga al menos un jugador
+        if len(nombres) == 0:
+            print("Error: el archivo no contiene jugadores.")
+            return None
+
+        return nombres, estadisticas_jugadores, puntuaciones, calificaciones
+
+    except FileNotFoundError:
+        print("Error: no se encontró el archivo.")
+        return None
+
+
 # Función para registrar a todos los jugadores
 
 def registrar_jugadores(cantidad_jugadores):
@@ -193,6 +278,7 @@ def registrar_jugadores(cantidad_jugadores):
         print("\nJugador", i + 1)
 
         nombre = pedir_nombre()
+        nombre = normalizar_nombre(nombre)
 
         estadisticas = obtener_estadisticas()
 
@@ -321,7 +407,7 @@ def mostrar_promedios_estadisticas(estadisticas_jugadores):
 
     for i in range(len(promedios_estadisticas)):
         print(
-            nombres_estadisticas[i] + ":",
+            NOMBRES_ESTADISTICAS[i] + ":",
             round(promedios_estadisticas[i], 2)
         )
 
@@ -348,13 +434,13 @@ def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
 # Función para preguntar si se desea continuar
 
 def preguntar_continuar():
-    """Pregunta si el usuario desea realizar otra búsqueda"""
+    """Pregunta si el usuario desea realizar otra evaluación"""
 
     while True:
 
         continuar = input(
-            "\n¿Deseas realizar otra búsqueda? (si/no): "
-        ).lower().strip()
+            "\n¿Deseas realizar otra evaluación? (si/no): "
+        ).strip().lower()
 
         if continuar == "si":
             return True
@@ -367,46 +453,98 @@ def preguntar_continuar():
             print("Opción invalida. Ingresa 'si' o 'no'.")
 
 
-#4. Función principal del programa ---------------------------------------
+# Función para elegir la forma de registrar jugadores
 
-print("Bienvenido al programa para calcular el desempeño"
+def pedir_modo_registro():
+    """Permite elegir entre registro manual o archivo externo."""
+
+    while True:
+        print("\n¿Cómo deseas registrar a los jugadores?")
+        print("1. Ingresar los datos manualmente")
+        print("2. Leer los datos desde un archivo")
+
+        ## Solicitar la opción y eliminar espacios innecesarios
+        opcion = input("Selecciona una opción: ").strip()
+
+        # Validar que la opción ingresada sea 1 o 2
+        if opcion == "1" or opcion == "2":
+            return opcion
+
+        print("Opción inválida. Selecciona 1 o 2.")
+
+
+#4. Función principal del programa -----------------------------------------
+
+def main():
+    """Ejecuta el programa principal de evaluación."""
+    
+    print("Bienvenido al programa para calcular el desempeño"
         " de tu equipo de basquetbol de hasta 5 personas")
 
-while True:
+    while True:
 
-    print("\nEstadísticas del equipo")
+        print("\nEstadísticas del equipo")
 
-    # Solicitar la cantidad de jugadores
-    cantidad_jugadores = pedir_cantidad_jugadores()
+        # Solicitar al usuario la forma de registrar a los jugadores
+        modo = pedir_modo_registro()
 
-    # Registrar los jugadores y sus estadísticas
-    nombres, estadisticas_jugadores, puntuaciones, calificaciones = (
-        registrar_jugadores(cantidad_jugadores)
-    )
+        if modo == "1":
 
-    # Mostrar resultados individuales
-    mostrar_resultados_jugadores(
-        nombres,
-        puntuaciones,
-        calificaciones
-    )
+            # Solicitar la cantidad de jugadores
+            cantidad_jugadores = pedir_cantidad_jugadores()
 
-    # Mostrar al mejor jugador
-    mostrar_mejor_jugador(
-        nombres,
-        puntuaciones,
-        calificaciones
-    )
+            # Registrar los jugadores y sus estadísticas
+            nombres, estadisticas_jugadores, puntuaciones, calificaciones = (
+            registrar_jugadores(cantidad_jugadores)
+        )
 
-    # Mostrar resultados generales del equipo
-    mostrar_resultados_equipo(
-        cantidad_jugadores,
-        puntuaciones,
-        estadisticas_jugadores
-    )
+        # Si selecciona la opción 2, leer los datos desde un archivo externo
+        elif modo == "2":
 
-    # Preguntar si se desea realizar otra evaluación
-    continuar = preguntar_continuar()
+            nombre_archivo = input(
+                "Escribe el nombre de tu archivo de estadísticas: "
+            )
 
-    if continuar == False:
-        break
+            datos = leer_jugadores_archivo(nombre_archivo)
+
+            # Si ocurre un error al leer el archivo, regresar al menú
+            if datos is None:
+                continue
+
+            # Separar y guardar la información obtenida del archivo
+            (nombres, estadisticas_jugadores, 
+            puntuaciones, calificaciones) = datos
+
+            cantidad_jugadores = len(nombres)
+    
+        # Mostrar resultados individuales
+        mostrar_resultados_jugadores(
+            nombres,
+            puntuaciones,
+            calificaciones
+        )
+
+        # Mostrar al mejor jugador
+        mostrar_mejor_jugador(
+            nombres,
+            puntuaciones,
+            calificaciones
+        )
+
+        # Mostrar resultados generales del equipo
+        mostrar_resultados_equipo(
+            cantidad_jugadores,
+            puntuaciones,
+            estadisticas_jugadores
+        )
+
+        # Preguntar si se desea realizar otra evaluación
+        continuar = preguntar_continuar()
+
+        if continuar == False:
+            break
+
+# Verifica que el archivo se esté ejecutando directamente
+# Llama a la función principal del programa
+if __name__ == "__main__":
+    main()

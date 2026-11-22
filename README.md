@@ -42,15 +42,15 @@ Cálculo de promedios y sumas.
 Actualmente el programa tiene las siguientes estadísticas
 
 Estadística	        Valor asignado
-Punto	              1
+Punto	            1
 Asistencia	        0.8
-Rebote	           0.5
-Robo	              1.5
-Pase fallido	     -2
-Triple	           3
-Pérdida de balón	  -1.5
-Tapón	              2
-Falta	              -3
+Rebote	            0.5
+Robo	            1.5
+Pase fallido	    -2
+Triple	            3
+Pérdida de balón	-1.5
+Tapón	            2
+Falta	            -3
 
 
 Estos valores se utilizan dentro del programa como constantes, para calcular la puntuación de desempeño de cada jugador
@@ -59,41 +59,103 @@ Estos valores se utilizan dentro del programa como constantes, para calcular la 
 
 ## Funciones actuales
 
-El programa cuenta con las siguientes funciones:
+El programa cuenta con las siguientes 22 funciones:
 
-1. pedir_dato(mensaje): Solicita un dato al usuario y valida que sea un número entero no negativo.
+1. pedir_dato(mensaje): solicita una estadística al usuario y valida que sea un número entero entre 0 y 99. Si el dato no es válido, vuelve a solicitarlo.
 
-2. pedir_cantidad_jugadores(): Solicita la cantidad de jugadores que se van a evaluar y valida que sea entre 1 y 5.
+2. normalizar_nombre(nombre): elimina espacios innecesarios al inicio y al final, reduce los espacios repetidos entre palabras y organiza las mayúsculas del nombre.
 
-3. manipular_nombre(nombre): Realiza diferentes operaciones con el nombre del jugador, como obtener su longitud, dividirlo en partes y cambiarlo a mayúsculas o minúsculas.
+3. validar_nombre(nombre): verifica que el nombre no esté vacío, que no supere los 30 caracteres y que contenga únicamente letras y espacios.
 
-4. obtener_estadisticas(): Solicita las nueve estadísticas de cada jugador y utiliza la función pedir_dato() para validar los datos.
+4. pedir_nombre(): solicita el nombre del jugador, lo normaliza y utiliza la función validar_nombre() para comprobar que sea válido.
 
-5. calcular_desempeno(...): Calcula la puntuación de desempeño de cada jugador utilizando los valores establecidos para las estadísticas.
+5. pedir_cantidad_jugadores(): Solicita la cantidad de jugadores que se van a evaluar y valida que sea entre 1 y 5.
 
-6. obtener_calificacion(puntuacion): Convierte la puntuación de desempeño en una calificación del 1 al 10.
+6. obtener_estadisticas(): Solicita las nueve estadísticas de cada jugador y utiliza la función pedir_dato() para validar los datos.
 
-7. registrar_jugadores(cantidad_jugadores): Registra los nombres y las estadísticas de los jugadores, y almacena sus puntuaciones y calificaciones.
+7. calcular_desempeno(...): Calcula la puntuación de desempeño de cada jugador utilizando los valores establecidos para las estadísticas.
 
-8. calcular_promedio_equipo(puntuaciones): Calcula el promedio de desempeño de todos los jugadores del equipo.
+8. obtener_calificacion(puntuacion): Convierte la puntuación de desempeño en una calificación del 1 al 10.
 
-9. calcular_puntos_totales(estadisticas_jugadores): Calcula la cantidad total de puntos anotados por todos los jugadores.
+9. leer_jugadores_archivo(nombre_archivo): abre y lee un archivo de texto externo cuyo nombre proporciona el usuario. Separa los datos de cada jugador, normaliza y valida los nombres, verifica que las estadísticas sean números enteros entre 0 y 99 y calcula las puntuaciones y calificaciones. También comprueba que el archivo tenga como máximo cinco jugadores y que contenga información válida.
 
-10. calcular_promedios_estadisticas(matriz): Calcula el promedio de cada estadística utilizando los datos almacenados en una matriz o lista anidada.
+10. registrar_jugadores(cantidad_jugadores): Registra los nombres y las estadísticas de los jugadores, y almacena sus puntuaciones y calificaciones.
 
-11. encontrar_mejor_jugador(puntuaciones): Identifica la posición del jugador que obtuvo la puntuación más alta.
+11. calcular_promedio_equipo(puntuaciones): Calcula el promedio de desempeño de todos los jugadores del equipo.
 
-12. mostrar_resultado(nombre, puntuacion, calificacion): Muestra el nombre, la puntuación y la calificación de un jugador.
+12. calcular_puntos_totales(estadisticas_jugadores): Calcula la cantidad total de puntos anotados por todos los jugadores.
 
-13. mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones): Muestra los resultados individuales de todos los jugadores.
+13. calcular_promedios_estadisticas(matriz): Calcula el promedio de cada estadística utilizando los datos almacenados en una matriz o lista anidada.
 
-14. mostrar_mejor_jugador(nombres, puntuaciones, calificaciones): Muestra al jugador con el mejor desempeño y su puntuación.
+14. encontrar_mejor_jugador(puntuaciones): Identifica la posición del jugador que obtuvo la puntuación más alta.
 
-15. mostrar_promedios_estadisticas(estadisticas_jugadores): Muestra el promedio de cada una de las estadísticas del equipo.
+15. mostrar_resultado(nombre, puntuacion, calificacion): Muestra el nombre, la puntuación y la calificación de un jugador.
 
-16. mostrar_resultados_equipo(cantidad_jugadores, puntuaciones, estadisticas_jugadores): Muestra los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y los promedios.
+16. mostrar_resultados_jugadores(nombres, puntuaciones, calificaciones): Muestra los resultados individuales de todos los jugadores.
 
-17. preguntar_continuar(): Pregunta al usuario si desea realizar otra evaluación o finalizar el programa.
+17. mostrar_mejor_jugador(nombres, puntuaciones, calificaciones): Muestra al jugador con el mejor desempeño y su puntuación.
+
+18. mostrar_promedios_estadisticas(estadisticas_jugadores): Muestra el promedio de cada una de las estadísticas del equipo.
+
+19. mostrar_resultados_equipo(cantidad_jugadores, puntuaciones, estadisticas_jugadores): Muestra los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y los promedios.
+
+20. preguntar_continuar(): pregunta al usuario si desea realizar otra evaluación o finalizar el programa. Valida que la respuesta sea "si" o "no".
+
+21. pedir_modo_registro(): permite elegir entre registrar los datos manualmente o leerlos desde un archivo externo. Valida que la opción seleccionada sea 1 o 2.
+
+22. main(): coordina la ejecución del programa. Muestra el menú, solicita el modo de registro, obtiene los datos, presenta los resultados y permite realizar otra evaluación.
+
+# Registro mediante archivo externo
+
+Además del registro manual, el programa permite obtener la información de los jugadores desde cualquier archivo de texto externo que cumpla con el formato establecido.
+
+Para utilizar esta opción, el programa solicita al usuario que escriba el nombre del archivo de estadísticas que desea utilizar. Por ejemplo:
+
+estadisticas_equipo.txt
+
+No es obligatorio que el archivo tenga un nombre específico. El usuario puede utilizar su propio documento, siempre que esté disponible en la ubicación desde la que se ejecuta el programa y respete el formato requerido.
+
+Cada línea del archivo debe contener el nombre del jugador y sus nueve estadísticas, separados por comas. Por lo tanto, cada línea debe tener exactamente diez datos: un nombre y nueve números.
+
+Ejemplo del formato:
+
+Carlos Ruiz,18,5,7,2,1,3,2,1,2
+Miguel Torres,22,4,6,3,2,2,1,2,1
+Daniel Herrera,15,7,8,1,0,4,3,3,2
+Andres Morales,12,3,5,2,1,1,2,1,3
+Luis Fernandez,20,6,4,2,0,3,1,2,1
+
+El archivo puede tener cualquier nombre, pero debe contener la información con el orden y formato indicados.
+
+Al leer el archivo, el programa comprueba que:
+
+    1.Cada línea tenga diez datos separados por comas.
+
+    2.El nombre sea válido y no supere los 30 caracteres.
+
+    3.Las nueve estadísticas sean números enteros entre 0 y 99.
+
+    4.El archivo no contenga más de cinco jugadores.
+
+    5.El archivo contenga al menos un jugador.
+
+Si el archivo no existe o contiene información inválida, el programa muestra un mensaje de error y regresa al menú para que el usuario pueda volver a elegir cómo registrar los datos.
+
+# Resultados que muestra el programa
+
+Después de registrar o leer los datos, el programa presenta:
+
+    1.Los nombres, puntuaciones y calificaciones individuales de los jugadores.
+
+    2.El jugador que obtuvo la puntuación de desempeño más alta.
+
+    3.La cantidad de jugadores registrados.
+
+    4.Los puntos totales anotados por el equipo.
+
+    5.El promedio de desempeño del equipo.
+
+    6.El promedio de cada una de las nueve estadísticas
 
 ## Estructura del Repositorio
 
@@ -112,6 +174,8 @@ LICENSE	           Contiene la licencia MIT del proyecto y establece las condici
 .gitignore	        Indica a Git qué archivos y carpetas debe ignorar para evitar subir archivos innecesarios al repositorio.
 
 
+Nota: Los archivos de estadísticas son documentos externos que proporciona el usuario. No es obligatorio incluir un archivo específico dentro del repositorio, ya que el programa permite escribir el nombre del documento que se desea utilizar.
+
 ## ¿Qué se necesita para que funcione?
 
 Para ejecutar el proyecto se necesita.
@@ -120,6 +184,7 @@ Python 3 instalado.
 Un editor de código o terminal para ejecutar el programa.
 No se requieren librerías externas.
 
+Para utilizar la opción de registro mediante archivo también se necesita tener un archivo de texto con las estadísticas de los jugadores, siguiendo el formato indicado anteriormente.
 
 ## ¿Cómo ejecutar el proyecto?
 
@@ -143,30 +208,65 @@ En algunos sistemas puede ser necesario utilizar:
 
 python3 proyecto.py
 
+3. Elegir el modo de registro
+
+Al iniciar el programa, aparecerá un menú con dos opciones:
+
+Ingresar los datos manualmente.
+
+Leer los datos desde un archivo.
+
+El usuario debe seleccionar la opción deseada. Después, el programa solicitará o leerá la información y mostrará los resultados.
+
+Si se selecciona la segunda opción, el programa solicitará el nombre del archivo de estadísticas que se desea utilizar.
+
+Por ejemplo:
+
+Escribe el nombre de tu archivo de estadísticas: estadisticas_equipo.txt
+
+El usuario puede escribir el nombre de su propio archivo, sin necesidad de cambiar el código del programa.
+
+# Validaciones del programa
+
+Para evitar errores durante la ejecución, el programa valida los datos de las siguientes maneras:
+
+    1.Estadísticas: deben ser números enteros entre 0 y 99.
+
+    2.Cantidad de jugadores: debe ser un número entero entre 1 y 5.
+
+    3.Nombres: no pueden estar vacíos, deben tener un máximo de 30 caracteres y solo pueden contener letras y espacios.
+
+    4.Modo de registro: únicamente se aceptan las opciones 1 y 2.
+
+    5.Continuar o finalizar: únicamente se aceptan las respuestas "si" o "no".
+
+    6.Archivo externo: debe existir, contener al menos un jugador y tener el formato correcto. Cada jugador debe tener un nombre y nueve estadísticas.
+
+Cuando un dato ingresado manualmente no cumple con las condiciones, el programa muestra un mensaje de error y vuelve a solicitarlo. Si el archivo contiene información inválida, muestra el error correspondiente y permite regresar al menú.
 
 ## Estado actual del proyecto
 
-El proyecto se encuentra actualmente en desarrollo.
+El proyecto cuenta con las siguientes funcionalidades:
 
-Hasta este punto se han implementado:
-
-Las constantes correspondientes al valor de cada estadística.
-Una función para solicitar y validar datos ingresados por el usuario.
-La posibilidad de seleccionar la cantidad de jugadores que se van a evaluar, siendo el mínimo 1 y el máximo 5.
-Una función para manipular y mostrar diferentes partes del nombre de cada jugador.
-Una función para obtener las nueve estadísticas de cada jugador.
-El almacenamiento de los nombres de los jugadores.
-El almacenamiento de las estadísticas mediante listas anidadas.
-El cálculo de la puntuación de desempeño de cada jugador.
-La conversión de la puntuación en una calificación del 1 al 10.
-El almacenamiento de las puntuaciones y calificaciones de los jugadores.
-El cálculo de los puntos totales anotados por los jugadores.
-El cálculo del promedio de desempeño del equipo.
-El cálculo del promedio de cada estadística de todos los jugadores.
-La comparación de las puntuaciones para identificar al jugador con mejor desempeño.
-La presentación de los resultados individuales de cada jugador.
-La presentación de los resultados generales del equipo.
-La opción de realizar una nueva evaluación o finalizar el programa.
+1. Definición de constantes para asignar un valor a cada estadística.
+2. Registro manual de entre 1 y 5 jugadores.
+3. Registro de jugadores mediante un archivo de texto externo.
+4. Posibilidad de utilizar archivos de estadísticas con nombres personalizados.
+5. Solicitud y validación de nombres.
+6. Normalización de nombres para eliminar espacios innecesarios y organizar las mayúsculas.
+7. Solicitud y validación de las nueve estadísticas de cada jugador.
+8. Validación de números enteros dentro del rango de 0 a 99.
+9. Almacenamiento de nombres y estadísticas mediante listas y listas anidadas.
+10. Cálculo de la puntuación de desempeño de cada jugador.
+11. Conversión de la puntuación en una calificación del 1 al 10.
+12. Cálculo de los puntos totales anotados por el equipo.
+13. Cálculo del promedio de desempeño del equipo.
+14. Cálculo del promedio de cada estadística de todos los jugadores.
+15. Comparación de las puntuaciones para identificar al jugador con mejor desempeño.
+16. Presentación de los resultados individuales.
+17. Presentación de los resultados generales del equipo.
+18. Opción para realizar una nueva evaluación o finalizar el programa.
+19. Validación de la información obtenida desde el archivo externo.
 
 ## Próximos pasos
 
@@ -185,67 +285,44 @@ Este proyecto utiliza la licencia MIT. Para consultar los términos completos, r
 
 ## Algoritmo
 
-1. Iniciar el programa.
+Iniciar el programa.
 
-2. Mostrar una bienvenida al usuario.
+1. Mostrar un mensaje de bienvenida.
+2. Mostrar el menú para elegir el modo de registro:
 
-3. Definir los valores constantes de cada estadística
-Punto = 1
-Asistencia = 0.8
-Rebote = 0.5
-Robo = 1.5
-Pase fallido = -2
-Triple = 3
-Pérdida de balón = -1.5
-Tapón = 2
-Falta = -3
+3. Ingresar los datos manualmente.
+    Leer los datos desde un archivo externo.
+    Validar que la opción seleccionada sea 1 o 2. Si es incorrecta, solicitarla nuevamente.
 
-4. Solicitar los datos de los jugadores que desea evaluar, con un mínimo de 1 y un máximo de 5.
+4. Si el usuario elige el registro manual:
+    Solicitar la cantidad de jugadores.
+    Validar que sea un número entero entre 1 y 5.
+    Solicitar el nombre de cada jugador.
+    Normalizar y validar cada nombre.
+    Solicitar las nueve estadísticas de cada jugador.
+    Validar que cada estadística sea un número entero entre 0 y 99.
+    Guardar los nombres y las estadísticas en las listas correspondientes.
 
-5. Validar que la cantidad de jugadores ingresada se encuentre dentro del rango permitido. Si el dato es incorrecto, solicitarlo nuevamente.
+6. Si el usuario elige el registro mediante archivo:
+    Solicitar el nombre del archivo de estadísticas que desea utilizar.
+    Abrir el archivo indicado por el usuario.
+    Leer cada línea y separar sus datos mediante comas.
+    Comprobar que cada jugador tenga un nombre y nueve estadísticas.
+    Normalizar y validar el nombre.
+    Convertir las estadísticas a números enteros y validar que estén entre 0 y 99.
+    Comprobar que el archivo contenga entre 1 y 5 jugadores.
+    Guardar los datos válidos en las listas correspondientes.
+    Si ocurre un error, mostrar un mensaje y regresar al menú.
 
-6. Crear las listas para almacenar los nombres, las estadísticas, las puntuaciones y las calificaciones de los jugadores
-
-7. Solicitar el nombre de cada jugador.
-
-8. Mostrar y manipular diferentes partes del nombre del jugador, utilizando operaciones con cadenas de texto.
-
-9. Solicitar las estadísticas de cada jugador mediante la función obtener_estadisticas().
-
-10. Validar cada dato ingresado
-
-Verificar que sea un número entero.
-Verificar que no sea negativo.
-Si el dato es incorrecto, mostrar un mensaje de error y solicitarlo nuevamente.
-
-11. Calcular la puntuación de desempeño de cada jugador utilizando el valor correspondiente de cada estadística.
-
-12. Convertir la puntuación de desempeño en una calificación del 1 al 10 mediante condiciones.
-
-13. Guardar la información correspondiente de cada jugador en las listas correspondientes.
-
-14. Mostrar el nombre, la puntuación y la calificación de cada jugador.
-
-15. Comparar las puntuaciones de los jugadores registrados.
-
-16. Identificar al jugador con el mejor desempeño.
-
-17. Mostrar al jugador con mayor puntuación y su calificación.
-
-18. Calcular el promedio de las puntuaciones de desempeño de los jugadores registrados.
-
-19. Calcular los puntos totales anotados por todos los jugadores registrados.
-
-20. Calcular el promedio de cada estadística de todos los jugadores utilizando una matriz o lista anidada.
-
-21. Mostrar los promedios de cada estadística del equipo.
-
-22. Mostrar los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y el promedio de desempeño.
-
-Al finalizar:
-
-23. Preguntar al usuario si desea realizar otra evaluación.
-
-24. El usuario desea realizar otra evaluación, regresar al proceso de registro de jugadores.
-
-25. Si el usuario no desea realizar otra evaluación, finalizar el programa.
+7. Calcular la puntuación de desempeño de cada jugador utilizando los valores asignados a las nueve estadísticas.
+8. Convertir cada puntuación en una calificación del 1 al 10 mediante condiciones.
+9. Mostrar el nombre, la puntuación y la calificación de cada jugador.
+10. Comparar las puntuaciones e identificar al jugador con el mejor desempeño.
+11. Mostrar al jugador con mayor puntuación y su calificación.
+12. Calcular el promedio de desempeño de todos los jugadores.
+13. Calcular los puntos totales anotados por el equipo.
+14. Calcular el promedio de cada una de las nueve estadísticas utilizando la lista anidada.
+15. Mostrar los resultados generales del equipo y los promedios de sus estadísticas.
+16. Preguntar al usuario si desea realizar otra evaluación.
+17. Si responde "si", regresar al menú de registro.
+18. Si responde "no", finalizar el programa.
