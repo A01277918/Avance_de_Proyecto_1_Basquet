@@ -18,24 +18,33 @@ Este proyecto también me parece una buena forma de utilizar lo que voy aprendie
 
 ## Descripción
 
-Este programa consiste en desarrollar un programa en Python para calcular el desempeño de jugadores de baloncesto a partir de diferentes estadísticas obtenidas durante el partido.
+Este programa está desarrollado en Python y permite calcular el desempeño de entre 1 y 5 jugadores de básquetbol a partir de nueve estadísticas obtenidas durante un partido.
 
-El programa asigna un valor diferente a cada estadística y utiliza estos valores para calcular una puntuación de desempeño. Después de obtener las estadísticas de cada jugador, el programa calcula una puntuación de desempeño utilizando los valores asignados a cada estadística. Posteriormente, convierte esa puntuación en una calificación del 1 al 10.
+Al iniciar, el usuario puede elegir entre dos formas de registrar a los jugadores:
+
+    1. Registro manual: ingresar los nombres y las estadísticas de cada jugador directamente en el programa. Al terminar la evaluación, el usuario puede guardar las estadísticas y los resultados en un archivo de texto (.txt), escribiendo el nombre que desea utilizar.</span>
+
+    2. Registro mediante archivo: leer los nombres y las estadísticas desde un archivo de texto externo. El usuario puede escribir el nombre del archivo que desea utilizar, por lo que no es necesario que tenga un nombre específico.
+
+El programa valida la información ingresada o leída desde el archivo. Los nombres deben contener únicamente letras y espacios, y no pueden superar los 30 caracteres. Las estadísticas deben ser números enteros entre 0 y 99.
+
+Después de obtener los datos, el programa calcula la puntuación de desempeño de cada jugador mediante los valores asignados a las estadísticas. Posteriormente, convierte esa puntuación en una calificación del 1 al 10.
+
+Finalmente, muestra los resultados individuales, identifica al jugador con mejor desempeño y presenta los resultados generales del equipo, incluyendo los puntos totales y el promedio de cada estadística. Cuando el registro se realiza manualmente, también permite guardar las estadísticas y los resultados en un archivo de texto (.txt) con el nombre que el usuario elija.
 
 El proyecto tiene objetivo aplicar conocimientos básicos de programación tales como:
 
 Variables y constantes.
-Funciones.
-Parámetros.
-Condicionales.
-Ciclos while.
-Validación de datos.
-Operaciones matemáticas.
-Programación modular.
-Listas para almacenar la información de varios jugadores.
-Ciclos for para recorrer las estadísticas de los jugadores.
-Comparación de resultados.
-Cálculo de promedios y sumas.
+Tipos de datos y operaciones aritméticas.
+Funciones y modularización del código.
+Paso de parámetros y retorno de valores.
+Condicionales (if, elif, else).
+Ciclos (while y for).
+Listas y listas anidadas.
+Manipulación y validación de cadenas de texto.
+Validación de datos mediante try y except.
+Lectura y procesamiento de archivos externos.
+Uso de métodos y funciones integradas de Python.
 
 ## Estadísticas Utilizadas
 
@@ -55,9 +64,8 @@ Falta	            -3
 
 Estos valores se utilizan dentro del programa como constantes, para calcular la puntuación de desempeño de cada jugador
 
-## Funciones Actualizadas
 
-## Funciones actuales
+## Funciones Actuales
 
 El programa cuenta con las siguientes 22 funciones:
 
@@ -99,11 +107,13 @@ El programa cuenta con las siguientes 22 funciones:
 
 19. mostrar_resultados_equipo(cantidad_jugadores, puntuaciones, estadisticas_jugadores): Muestra los resultados generales del equipo, incluyendo la cantidad de jugadores, los puntos totales y los promedios.
 
-20. preguntar_continuar(): pregunta al usuario si desea realizar otra evaluación o finalizar el programa. Valida que la respuesta sea "si" o "no".
+20. guardar_resultados_archivo (nombres, estadisticas_jugadores, puntuaciones, calificaciones): solicita al usuario el nombre que desea asignar al documento y guarda en un archivo .txt las estadísticas de cada jugador, sus puntuaciones y calificaciones, además de los resultados generales, el mejor jugador y los promedios del equipo. Se utiliza cuando el registro se realiza manualmente.
 
-21. pedir_modo_registro(): permite elegir entre registrar los datos manualmente o leerlos desde un archivo externo. Valida que la opción seleccionada sea 1 o 2.
+21. preguntar_continuar(): pregunta al usuario si desea realizar otra evaluación o finalizar el programa. Valida que la respuesta sea "si" o "no".
 
-22. main(): coordina la ejecución del programa. Muestra el menú, solicita el modo de registro, obtiene los datos, presenta los resultados y permite realizar otra evaluación.
+22. pedir_modo_registro(): permite elegir entre registrar los datos manualmente o leerlos desde un archivo externo. Valida que la opción seleccionada sea 1 o 2.
+
+23. main(): coordina la ejecución del programa. Muestra el menú, solicita el modo de registro, obtiene los datos, presenta los resultados y permite realizar otra evaluación.
 
 # Registro mediante archivo externo
 
@@ -141,7 +151,21 @@ Al leer el archivo, el programa comprueba que:
 
 Si el archivo no existe o contiene información inválida, el programa muestra un mensaje de error y regresa al menú para que el usuario pueda volver a elegir cómo registrar los datos.
 
-# Resultados que muestra el programa
+# Archivo de ejemplo
+
+El repositorio incluye el archivo `datos_ejemplo.txt`, que contiene estadísticas de cinco jugadores y permite probar la funcionalidad de lectura de archivos externos.
+
+El usuario puede utilizar este archivo para comprobar el funcionamiento del programa o utilizar uno propio, siempre que respete el formato y la estructura de datos establecidos. Este archivo se utiliza para leer estadísticas; es diferente del documento .txt que el programa puede generar al guardar una evaluación manual.
+
+Para probarlo:
+
+1. Descarga el archivo `datos_ejemplo.txt` del repositorio.
+2. Ejecuta el programa.
+3. Selecciona la opción de leer los datos desde un archivo.
+4. Ingresa `datos_ejemplo.txt` cuando el programa solicite el nombre del archivo.
+5. El programa procesará la información y mostrará los resultados.
+
+## Resultados que muestra el programa
 
 Después de registrar o leer los datos, el programa presenta:
 
@@ -157,7 +181,9 @@ Después de registrar o leer los datos, el programa presenta:
 
     6.El promedio de cada una de las nueve estadísticas
 
-## Estructura del Repositorio
+Cuando los datos se ingresan manualmente, el programa también permite guardar las estadísticas y los resultados de la evaluación en un archivo .txt con el nombre que proporcione el usuario.
+
+### Estructura del Repositorio
 
 El repositorio tiene los siguientes archivos:
 
@@ -174,7 +200,7 @@ LICENSE	           Contiene la licencia MIT del proyecto y establece las condici
 .gitignore	        Indica a Git qué archivos y carpetas debe ignorar para evitar subir archivos innecesarios al repositorio.
 
 
-Nota: Los archivos de estadísticas son documentos externos que proporciona el usuario. No es obligatorio incluir un archivo específico dentro del repositorio, ya que el programa permite escribir el nombre del documento que se desea utilizar.
+Nota: Los archivos de estadísticas son documentos externos que proporciona el usuario. No es obligatorio incluir un archivo específico dentro del repositorio, ya que el programa permite escribir el nombre del documento que se desea utilizar. Además, cuando se realiza un registro manual, el programa puede crear un archivo .txt nuevo con las estadísticas y los resultados de esa evaluación
 
 ## ¿Qué se necesita para que funcione?
 
@@ -216,7 +242,7 @@ Ingresar los datos manualmente.
 
 Leer los datos desde un archivo.
 
-El usuario debe seleccionar la opción deseada. Después, el programa solicitará o leerá la información y mostrará los resultados.
+El usuario debe seleccionar la opción deseada. Después, el programa solicitará o leerá la información y mostrará los resultados. Si selecciona el registro manual, al finalizar podrá escribir el nombre con el que desea guardar un documento .txt con la evaluación.
 
 Si se selecciona la segunda opción, el programa solicitará el nombre del archivo de estadísticas que se desea utilizar.
 
@@ -267,8 +293,9 @@ El proyecto cuenta con las siguientes funcionalidades:
 17. Presentación de los resultados generales del equipo.
 18. Opción para realizar una nueva evaluación o finalizar el programa.
 19. Validación de la información obtenida desde el archivo externo.
+20. Creación de un archivo .txt con nombre personalizado para guardar las estadísticas y los resultados cuando el registro se realiza manualmente.
 
-## Próximos pasos
+# Próximos pasos
 
 La siguiente etapa del proyecto consiste en continuar mejorando el programa para:
 
@@ -283,7 +310,7 @@ Continuar desarrollando el proyecto conforme a los conocimientos adquiridos en p
 Este proyecto utiliza la licencia MIT. Para consultar los términos completos, revisar el archivo LICENSE.
 
 
-## Algoritmo
+### Algoritmo
 
 Iniciar el programa.
 
@@ -323,6 +350,7 @@ Iniciar el programa.
 13. Calcular los puntos totales anotados por el equipo.
 14. Calcular el promedio de cada una de las nueve estadísticas utilizando la lista anidada.
 15. Mostrar los resultados generales del equipo y los promedios de sus estadísticas.
-16. Preguntar al usuario si desea realizar otra evaluación.
-17. Si responde "si", regresar al menú de registro.
-18. Si responde "no", finalizar el programa.
+16. Si el registro fue manual, solicitar al usuario un nombre para el documento y guardar en un archivo .txt las estadísticas, puntuaciones, calificaciones y resultados generales, incluyendo el mejor jugador y los promedios.
+17. Preguntar al usuario si desea realizar otra evaluación.
+18. Si responde "si", regresar al menú de registro.
+19. Si responde "no", finalizar el programa.

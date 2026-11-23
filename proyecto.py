@@ -431,6 +431,105 @@ def mostrar_resultados_equipo(cantidad_jugadores, puntuaciones,
     mostrar_promedios_estadisticas(estadisticas_jugadores)
 
 
+# Función para guardar los resultados en un archivo de texto
+
+def guardar_resultados_archivo(nombres, estadisticas_jugadores,
+                            puntuaciones, calificaciones):
+    """Guarda las estadísticas y resultados en un archivo .txt"""
+
+    nombre_archivo = input(
+        "\nIngresa el nombre para guardar el documento: "
+    ).strip()
+
+    # Agregar la extensión .txt al nombre del archivo
+    if not nombre_archivo.endswith(".txt"):
+        nombre_archivo = nombre_archivo + ".txt"
+
+    # Abrir el archivo para escribir los resultados
+    with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+
+        archivo.write("ESTADÍSTICAS DEL EQUIPO DE BALONCESTO\n")
+        archivo.write("-------------------------------------\n")
+
+        # Guardar las estadísticas de cada jugador
+        for i in range(len(nombres)):
+
+            archivo.write("\nJugador: " + nombres[i] + "\n")
+
+            for j in range(len(estadisticas_jugadores[i])):
+
+                archivo.write(
+                    NOMBRES_ESTADISTICAS[j] + ": "
+                    + str(estadisticas_jugadores[i][j]) + "\n"
+                )
+
+            archivo.write(
+                "Puntuación: " + str(puntuaciones[i]) + "\n"
+            )
+
+            archivo.write(
+                "Calificación: " + str(calificaciones[i]) + "/10\n"
+            )
+
+        # Guardar los resultados generales del equipo
+        promedio = calcular_promedio_equipo(puntuaciones)
+
+        puntos_totales = calcular_puntos_totales(
+            estadisticas_jugadores
+        )
+
+        archivo.write("\nRESULTADOS GENERALES DEL EQUIPO\n")
+        archivo.write("-------------------------------------\n")
+
+        archivo.write(
+            "Cantidad de jugadores: " + str(len(nombres)) + "\n"
+        )
+
+        archivo.write(
+            "Puntos totales: " + str(puntos_totales) + "\n"
+        )
+
+        archivo.write(
+            "Promedio de desempeño: " + str(round(promedio, 2)) + "\n"
+        )
+
+        # Guardar al mejor jugador
+        mejor_indice = encontrar_mejor_jugador(puntuaciones)
+
+        archivo.write("\nMEJOR JUGADOR\n")
+        archivo.write("-------------------------------------\n")
+
+        archivo.write(
+            "Jugador: " + nombres[mejor_indice] + "\n"
+        )
+
+        archivo.write(
+            "Puntuación: " + str(puntuaciones[mejor_indice]) + "\n"
+        )
+
+        archivo.write(
+            "Calificación: "
+            + str(calificaciones[mejor_indice]) + "/10\n"
+        )
+
+        # Guardar los promedios de las estadísticas
+        promedios = calcular_promedios_estadisticas(
+            estadisticas_jugadores
+        )
+
+        archivo.write("\nPROMEDIOS DE ESTADÍSTICAS\n")
+        archivo.write("-------------------------------------\n")
+
+        for i in range(len(promedios)):
+
+            archivo.write(
+                NOMBRES_ESTADISTICAS[i] + ": "
+                + str(round(promedios[i], 2)) + "\n"
+            )
+
+    print("\nEl documento se guardó correctamente:", nombre_archivo)
+
+
 # Función para preguntar si se desea continuar
 
 def preguntar_continuar():
@@ -537,7 +636,16 @@ def main():
             puntuaciones,
             estadisticas_jugadores
         )
+        
+        # Guardar los resultados si el registro fue manual
+        if modo == "1":
 
+            guardar_resultados_archivo(
+            nombres,
+            estadisticas_jugadores,
+            puntuaciones,
+            calificaciones
+            )
         # Preguntar si se desea realizar otra evaluación
         continuar = preguntar_continuar()
 
